@@ -29,16 +29,6 @@ public class AccountRecord implements Serializable
 		this.paid = paid;
 	}
 	
-	public int getWorth() 
-	{
-		return worth;
-	}
-	
-	public void setWorth(int worth) 
-	{
-		this.worth = worth;
-	}
-	
 	public int getSettlement() 
 	{
 		return settlement;
