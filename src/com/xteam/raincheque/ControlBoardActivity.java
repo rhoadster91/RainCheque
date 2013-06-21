@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.text.InputType;
@@ -68,9 +69,10 @@ public class ControlBoardActivity extends Activity
 	        	    		s.sessionID = RainChequeApplication.sessionList.get(RainChequeApplication.sessionList.size() - 1).sessionID + 1;	        	    	
 	        	    	else	        	    	
 	        	    		s.sessionID = 1;
-	        	    	RainChequeApplication.sessionList.add(s);
-	        	    	RainChequeApplication.writeAccountsToFile(getApplicationContext());
-	        	    	refreshList();
+	        	    	s.accountList = new ArrayList<AccountRecord>();
+	        	    	RainChequeApplication.currentSession = s;
+	        	    	Intent startListOfParticipantsActivity = new Intent(ControlBoardActivity.this, ListOfParticipantsActivity.class);
+	        	    	startActivity(startListOfParticipantsActivity);
 	        	    }
 	        	});
 	        	builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() 
@@ -143,7 +145,10 @@ public class ControlBoardActivity extends Activity
 	        	    	for(SessionRecord sr: RainChequeApplication.sessionList)
 	        	    	{
 	        	    		if(sr.sessionID == s.sessionID)
-	        	    			RainChequeApplication.sessionList.remove(sr);	        	    			
+	        	    		{
+	        	    			RainChequeApplication.sessionList.remove(sr);
+	        	    			break;
+	        	    		}
 	        	    	}
 	        	    	RainChequeApplication.writeAccountsToFile(getApplicationContext());
 	        	    	refreshList();
@@ -192,7 +197,10 @@ public class ControlBoardActivity extends Activity
 	        	    	for(SessionRecord sr: RainChequeApplication.sessionList)
 	        	    	{
 	        	    		if(sr.sessionID == s.sessionID)
-	        	    			RainChequeApplication.sessionList.remove(sr);	        	    			
+	        	    		{
+	        	    			RainChequeApplication.sessionList.remove(sr);
+	        	    			break;
+	        	    		}
 	        	    	}
 	        	    	RainChequeApplication.writeAccountsToFile(getApplicationContext());
 	        	    	refreshList();
@@ -219,5 +227,14 @@ public class ControlBoardActivity extends Activity
 		getMenuInflater().inflate(R.menu.control_board, menu);
 		return true;
 	}
+
+	@Override
+	protected void onResume() 
+	{
+		super.onResume();
+		refreshList();
+	}
+	
+	
 
 }

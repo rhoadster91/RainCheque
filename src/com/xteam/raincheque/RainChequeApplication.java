@@ -14,7 +14,7 @@ import android.content.Context;
 public class RainChequeApplication extends Application
 {
 	private static String LOCAL_FILE_FOR_ACCOUNTS = "session_list";
-	protected static int sessionID;
+	protected static SessionRecord currentSession;
 	protected static ArrayList<SessionRecord> sessionList;
 	
 	protected static void writeAccountsToFile(Context context) 
