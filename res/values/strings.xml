@@ -9,10 +9,13 @@
 	<string name="new_session_title">New session</string>	
 	<string name="session_name">Enter new session name</string>	
 	<string name="choose_session_action">Choose action</string>
+	<string name="choose_participant_action">Choose name info source</string>
 	<string name="delete_session">Delete session</string>
 	<string name="cancel">Cancel</string>	
 	<string name="list_of_participants">List of participants</string>
 	<string name="add_participant">Add participant</string>
+	<string name="participant_name">Enter new participant name</string>		
+	<string name="done">Done</string>
 	<string name="name_participant">Enter participant name</string>
 	<string name="from_text">Enter manually</string>
 	<string name="from_contacts">Pick from contacts</string>
@@ -25,5 +28,5 @@
 	<string name="end_session">End session</string>
 	<string name="select_paying_participant">Select paying participant</string>	
 	<string name="select_receiving_particitpant">Select receiving participant</string>
-	
+	<string name="ok">OK</string>
 </resources>

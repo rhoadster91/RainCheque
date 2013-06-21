@@ -12,7 +12,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" 
+        android:name="com.xteam.raincheque.RainChequeApplication">"
         <activity
             android:name="com.xteam.raincheque.ControlBoardActivity"
             android:label="@string/app_name" >
@@ -22,6 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.xteam.raincheque.ListOfParticipantsActivity" />
+        
     </application>
 
 </manifest>
