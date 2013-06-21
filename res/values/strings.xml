@@ -6,6 +6,11 @@
     <string name="active_sessions">Active sessions</string>
 	<string name="closed_sessions">Closed sessions</string>	
 	<string name="new_session">Create new session</string>
+	<string name="new_session_title">New session</string>	
+	<string name="session_name">Enter new session name</string>	
+	<string name="choose_session_action">Choose action</string>
+	<string name="delete_session">Delete session</string>
+	<string name="cancel">Cancel</string>	
 	<string name="list_of_participants">List of participants</string>
 	<string name="add_participant">Add participant</string>
 	<string name="name_participant">Enter participant name</string>

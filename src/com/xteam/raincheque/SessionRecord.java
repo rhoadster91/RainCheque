@@ -8,5 +8,7 @@ public class SessionRecord implements Serializable
 	private static final long serialVersionUID = 3627507367084333941L;
 	int total;
 	int sessionID;
+	String label;
+	boolean isActive = true;
 	ArrayList<AccountRecord> accountList;
 }
