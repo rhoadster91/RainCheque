@@ -26,7 +26,7 @@ public class SuggestionActivity extends Activity
 	
 	private void calculateSettlements()
 	{
-		int maxBalance = 0, closestBalance = 0;
+		int maxBalance = 0, closestBalance = 0, iteration = 0, correctiveChange = 0;
 		AccountRecord maxRecord = null, closestRecord = null;
 		ArrayList<AccountRecord> tempAccountList = new ArrayList<AccountRecord>(); 
 		for(AccountRecord a:RainChequeApplication.currentSession.accountList)
@@ -40,6 +40,9 @@ public class SuggestionActivity extends Activity
 		}
 		while(true)
 		{		
+			iteration++;
+			if(iteration>RainChequeApplication.currentSession.accountList.size())
+				correctiveChange++;
 			maxBalance = 0;
 			for(AccountRecord a: tempAccountList)
 			{
@@ -49,7 +52,7 @@ public class SuggestionActivity extends Activity
 					maxRecord = a;
 				}				
 			}
-			if(maxBalance==0)
+			if(Math.abs(maxBalance)<correctiveChange)
 				return;			
 			closestBalance = 0;
 			for(AccountRecord a: tempAccountList)
@@ -72,7 +75,9 @@ public class SuggestionActivity extends Activity
 				}
 				
 			}
-			String logText;
+			if(closestBalance==0)
+				continue;
+			String logText;			
 			if(maxBalance > 0)
 			{
 				closestRecord.paid -= closestBalance;
@@ -87,8 +92,7 @@ public class SuggestionActivity extends Activity
 			}			
 			LogEntry temp = new LogEntry();				    	
 			temp.entry = logText;
-			logEntries.add(temp);
-			
+			logEntries.add(temp);			
 		}
 	}	
 }
