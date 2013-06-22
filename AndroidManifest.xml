@@ -26,6 +26,7 @@
         </activity>
         <activity android:name="com.xteam.raincheque.ListOfParticipantsActivity" />
         <activity android:name="com.xteam.raincheque.LogActivity" />
+        <activity android:name="com.xteam.raincheque.SuggestionActivity" />
     </application>
 
 </manifest>

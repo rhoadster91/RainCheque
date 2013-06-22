@@ -153,8 +153,8 @@ public class LogActivity extends Activity
 				        	    	String payer = RainChequeApplication.currentSession.accountList.get(payerID).name;
 				        	    	String payee = RainChequeApplication.currentSession.accountList.get(payeeID).name;
 				        	    	String amount = input.getText().toString();
-				        	    	RainChequeApplication.currentSession.accountList.get(payerID).paid = Integer.parseInt(amount); 
-				        	    	RainChequeApplication.currentSession.accountList.get(payeeID).settlement = Integer.parseInt(amount); 
+				        	    	RainChequeApplication.currentSession.accountList.get(payerID).paid += Integer.parseInt(amount); 
+				        	    	RainChequeApplication.currentSession.accountList.get(payeeID).settlement += Integer.parseInt(amount); 
 				        	    	String logText = String.format(getString(R.string.settlement_statement), payer, amount, payee);
 				        	    	LogEntry logEntry = new LogEntry();
 				        	    	logEntry.entry = logText;
@@ -265,7 +265,8 @@ public class LogActivity extends Activity
 			break;
 			
 		case R.id.p_settlement:
-			Toast.makeText(getApplicationContext(), "Under construction", Toast.LENGTH_LONG).show();
+			Intent showSuggestions = new Intent(LogActivity.this, SuggestionActivity.class);
+			startActivity(showSuggestions);
 			break;
 			
 			

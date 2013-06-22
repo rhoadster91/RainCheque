@@ -36,5 +36,6 @@
 	<string name="select_payee">Select payee</string>
 	<string name="enter_amount">Enter settlement amount</string>
 	<string name="settlement_statement">%1$s has paid %2$s bucks to %3$s</string>
-	<string name="provider_label">Contacts</string>
+	<string name="settlement_proposal">%1$s could pay %2$s bucks to %3$s</string>
+	<string name="suggestion">Suggested settlement</string>	
 </resources>
