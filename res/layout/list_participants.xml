@@ -8,34 +8,40 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:text="@string/list_of_participants"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ListView
         android:id="@+id/listOfParticipants"
         android:layout_width="match_parent"
-        android:layout_height="159dp"
+        android:layout_height="0dp"
+        android:layout_weight="1.00"
         android:padding="10dp" >
-
     </ListView>
-
-    <LinearLayout
+   <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal" >
-
-        <Button
+        android:gravity="center_horizontal" 
+        android:baselineAligned="false"
+        style="@style/ButtonBar">
+        "
+		<Button
             android:id="@+id/buttonAddParticipant"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"        
             android:layout_height="wrap_content"
+            style="@style/ButtonBarButton"
             android:text="@string/add_participant" />
-
-        <Button
+		
+		 <Button
             android:id="@+id/buttonDoneAddingParticipants"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"        
             android:layout_height="wrap_content"
+            style="@style/ButtonBarButton"
             android:text="@string/done" />
-
+        
     </LinearLayout>
 
 </LinearLayout>

@@ -172,7 +172,7 @@ public class PaymentActivity extends Activity
 					{
 						RainChequeApplication.currentSession.accountList.get(pip.id).paid += pip.payment;
 						String payer = RainChequeApplication.currentSession.accountList.get(pip.id).name;
-						String logText = String.format(getString(R.string.payment_statement), payer, RainChequeApplication.currentSession.accountList.get(pip.id).paid, etLabel.getText().toString(), tvList.getText().toString());
+						String logText = String.format(getString(R.string.payment_statement), payer, pip.payment, etLabel.getText().toString(), tvList.getText().toString());
 	        	    	LogEntry logEntry = new LogEntry();
 	        	    	logEntry.entry = logText;
 	        	    	Time now = new Time();
