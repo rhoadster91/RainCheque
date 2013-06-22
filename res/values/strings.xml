@@ -31,4 +31,5 @@
 	<string name="select_paying_participant">Select paying participant</string>	
 	<string name="select_receiving_particitpant">Select receiving participant</string>
 	<string name="ok">OK</string>
+	<string name="balance">Balance</string>
 </resources>

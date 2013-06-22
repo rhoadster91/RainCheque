@@ -59,6 +59,7 @@ public final class R {
         public static final int active_sessions=0x7f050002;
         public static final int add_participant=0x7f05000e;
         public static final int app_name=0x7f050000;
+        public static final int balance=0x7f05001e;
         public static final int cancel=0x7f05000c;
         public static final int choose_participant_action=0x7f05000a;
         public static final int choose_session_action=0x7f050009;

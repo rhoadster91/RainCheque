@@ -27,8 +27,14 @@ public class ParticipantListAdapter extends ArrayAdapter<Object>
 	    LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	    View rowView = inflater.inflate(R.layout.session_row, parent, false);
 	    TextView sender = (TextView) rowView.findViewById(R.id.sessionName);
+	    TextView balance = (TextView)rowView.findViewById(R.id.sessionMembers);
 	    s = (AccountRecord)values[position];
-	    sender.setText(s.name);	    	    
+	    sender.setText(s.name);
+	    String bal = new String(context.getString(R.string.balance)+ ": ");
+	    if(s.getBalance() > 0)
+	    	bal = bal.concat("+");
+	    bal = bal.concat(""+s.getBalance());
+	    balance.setText(bal);
 	    return rowView;
 	  }
 }
