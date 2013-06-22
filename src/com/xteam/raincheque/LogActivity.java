@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class LogActivity extends Activity
 {
@@ -261,7 +260,8 @@ public class LogActivity extends Activity
 			break;
 			
 		case R.id.conf_payment:
-			Toast.makeText(getApplicationContext(), "Under construction", Toast.LENGTH_LONG).show();			
+			Intent showPayments = new Intent(LogActivity.this, PaymentActivity.class);
+			startActivity(showPayments);
 			break;
 			
 		case R.id.p_settlement:
@@ -299,6 +299,13 @@ public class LogActivity extends Activity
 	    }  
 	}
 	
+	@Override
+	protected void onResume() 
+	{
+		super.onResume();
+		refreshList();
+	}
+
 	private void refreshList()
 	{
 		logList = (ListView)findViewById(R.id.listLog);

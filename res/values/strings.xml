@@ -21,7 +21,8 @@
 	<string name="name_participant">Enter participant name</string>
 	<string name="from_text">Enter manually</string>
 	<string name="from_contacts">Pick from contacts</string>
-	<string name="select_multiple_participants">Select paying participants</string>
+	<string name="select_multiple_participants">Select involved participants</string>
+	<string name="select_paying_participants">Paying participants</string>
 	<string name="expense_label">Label</string>
 	<string name="enter_expenditure_per_person">Expenditure per person</string>
 	<string name="confirm_payment">Confirm payment</string>
@@ -38,4 +39,14 @@
 	<string name="settlement_statement">%1$s has paid %2$s bucks to %3$s</string>
 	<string name="settlement_proposal">%1$s could pay %2$s bucks to %3$s</string>
 	<string name="suggestion">Suggested settlement</string>	
+	<string name="label">Label</string>
+	<string name="label_example">e.g. Pizza, Petrol</string>
+	<string name="selected_participants">(empty)</string>
+	<string name="add">Add</string>
+	<string name="oops">Oops</string>
+	<string name="all_selected">All participants have already been selected</string>
+	<string name="none_selected">No participant has been selected</string>
+	<string name="paid">Paid:</string>
+	<string name="payment_statement">%1$s has paid %2$s on account of %3$s for %4$s</string>
+	
 </resources>

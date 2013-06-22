@@ -27,6 +27,7 @@
         <activity android:name="com.xteam.raincheque.ListOfParticipantsActivity" />
         <activity android:name="com.xteam.raincheque.LogActivity" />
         <activity android:name="com.xteam.raincheque.SuggestionActivity" />
+        <activity android:name="com.xteam.raincheque.PaymentActivity" />
     </application>
 
 </manifest>
