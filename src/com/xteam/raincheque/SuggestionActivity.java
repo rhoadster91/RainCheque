@@ -43,7 +43,7 @@ public class SuggestionActivity extends Activity
 			maxBalance = 0;
 			for(AccountRecord a: tempAccountList)
 			{
-				if(Math.abs(a.getBalance()) > maxBalance)
+				if(Math.abs(a.getBalance()) > Math.abs(maxBalance))
 				{
 					maxBalance = a.getBalance();
 					maxRecord = a;
