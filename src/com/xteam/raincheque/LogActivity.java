@@ -1,5 +1,7 @@
 package com.xteam.raincheque;
 
+import java.util.Calendar;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,21 +11,29 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.InputType;
+import android.text.format.DateFormat;
+import android.text.format.Time;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class LogActivity extends Activity
 {
+	int payerID, payeeID;
+	ListView logList = null;
+	LogAdapter logAdapter = null;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.log_activity);
+		refreshList();
 	}
 	
 	@Override
@@ -101,7 +111,103 @@ public class LogActivity extends Activity
         	builder.show();
 			break;
 			
-		case R.id.conf_payment:
+		case R.id.m_settlement:
+			builder = new AlertDialog.Builder(LogActivity.this);
+        	builder.setTitle(getString(R.string.select_payer));
+        	builder.setAdapter(new ParticipantListAdapter(getApplicationContext(), RainChequeApplication.currentSession.accountList.toArray()), new DialogInterface.OnClickListener() 
+        	{				
+				@Override
+				public void onClick(DialogInterface dialog, int which) 
+				{
+					Object []payeeList = new Object[RainChequeApplication.currentSession.accountList.size() - 1];
+					int j = 0;
+					for(int i=0;i<RainChequeApplication.currentSession.accountList.size();i++)
+					{
+						if(i!=which)
+						{
+							payeeList[j++] = RainChequeApplication.currentSession.accountList.get(i);
+						}
+					}		
+					payerID = which;
+					AlertDialog.Builder builder = new AlertDialog.Builder(LogActivity.this);
+    	        	builder.setTitle(getString(R.string.select_payee));
+    	        	builder.setAdapter(new ParticipantListAdapter(getApplicationContext(), payeeList), new DialogInterface.OnClickListener()
+    	        	{
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) 
+						{
+							payeeID = which;
+							if(payeeID>=payerID)
+								payeeID++;
+							AlertDialog.Builder builder = new AlertDialog.Builder(LogActivity.this);
+				        	builder.setTitle(getString(R.string.enter_amount));
+				        	final EditText input = new EditText(LogActivity.this);	        	
+				        	input.setInputType(InputType.TYPE_CLASS_NUMBER);
+				        	input.setPadding(30, 30, 30, 30);
+				        	builder.setView(input);
+				        	builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() 
+				        	{ 
+				        	    public void onClick(DialogInterface dialog, int which) 
+				        	    {
+				        	    	String payer = RainChequeApplication.currentSession.accountList.get(payerID).name;
+				        	    	String payee = RainChequeApplication.currentSession.accountList.get(payeeID).name;
+				        	    	String amount = input.getText().toString();
+				        	    	RainChequeApplication.currentSession.accountList.get(payerID).paid = Integer.parseInt(amount); 
+				        	    	RainChequeApplication.currentSession.accountList.get(payeeID).settlement = Integer.parseInt(amount); 
+				        	    	String logText = String.format(getString(R.string.settlement_statement), payer, amount, payee);
+				        	    	LogEntry logEntry = new LogEntry();
+				        	    	logEntry.entry = logText;
+				        	    	Time now = new Time();
+				        	    	now.setToNow();
+				        	    	String date = DateFormat.format("d MMMM yyyy", Calendar.getInstance()).toString();
+				        	    	logEntry.time = now.format(date + " at %I:%M:%S");				        	    	
+				        	    	RainChequeApplication.currentSession.sessionLog.add(logEntry);
+				        	    	for(SessionRecord s:RainChequeApplication.sessionList)
+				        			{
+				        				if(s.sessionID==RainChequeApplication.currentSession.sessionID)
+				        				{
+				        					s.sessionLog = RainChequeApplication.currentSession.sessionLog;
+				        					s.accountList = RainChequeApplication.currentSession.accountList;
+				        					break;
+				        				}
+				        			}
+				        	    	RainChequeApplication.writeAccountsToFile(getApplicationContext());
+				        	    	refreshList();
+				        	    }
+				        	});
+				        	builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() 
+				        	{
+				        	    public void onClick(DialogInterface dialog, int which) 
+				        	    {
+				        	        dialog.cancel();
+				        	    }
+				        	});
+
+				        	builder.show();
+						}
+    	        		
+    	        	});
+    	        	builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() 
+    	        	{
+    	        	    public void onClick(DialogInterface dialog, int which) 
+    	        	    {
+    	        	        dialog.cancel();
+    	        	    }
+    	        	});
+
+    	        	builder.show();					
+				}
+			});
+        	builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() 
+        	{
+        	    public void onClick(DialogInterface dialog, int which) 
+        	    {
+        	        dialog.cancel();
+        	    }
+        	});
+
+        	builder.show();
 			break;
 			
 		case R.id.e_session:
@@ -154,7 +260,7 @@ public class LogActivity extends Activity
 			onBackPressed();
 			break;
 			
-		case R.id.m_settlement:
+		case R.id.conf_payment:
 			Toast.makeText(getApplicationContext(), "Under construction", Toast.LENGTH_LONG).show();			
 			break;
 			
@@ -190,5 +296,12 @@ public class LogActivity extends Activity
     	    	
 	        }	        
 	    }  
+	}
+	
+	private void refreshList()
+	{
+		logList = (ListView)findViewById(R.id.listLog);
+		logAdapter = new LogAdapter(getApplicationContext(), RainChequeApplication.currentSession.sessionLog.toArray());
+		logList.setAdapter(logAdapter);			
 	}
 }

@@ -57,7 +57,7 @@ public class ListOfParticipantsActivity<CurrentActivity> extends Activity
 	        	{ 
 	        	    public void onClick(DialogInterface dialog, int which) 
 	        	    {
-	        	    	Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);  
+	        	    	Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI); 	        	    	
 	        	    	startActivityForResult(intent, 1);
 	        	    }
 	        	});
@@ -149,7 +149,8 @@ public class ListOfParticipantsActivity<CurrentActivity> extends Activity
 	    super.onActivityResult(reqCode, resultCode, data);  
 	    if (resultCode == Activity.RESULT_OK) 
 	    {  
-	        Uri contactUri = data.getData();  
+	        Uri contactUri = data.getData();
+	        
 	        Cursor cursor = getContentResolver().query(contactUri, null, null, null, null);
 	        if (cursor.moveToFirst()) 
 	        {

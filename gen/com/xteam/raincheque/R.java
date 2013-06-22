@@ -25,24 +25,25 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int a_participant=0x7f080010;
-        public static final int action_help=0x7f08000b;
+        public static final int a_participant=0x7f080011;
+        public static final int action_help=0x7f08000c;
         public static final int button1=0x7f080005;
         public static final int buttonAddParticipant=0x7f080007;
         public static final int buttonDoneAddingParticipants=0x7f080008;
-        public static final int conf_payment=0x7f08000c;
-        public static final int e_session=0x7f08000f;
+        public static final int conf_payment=0x7f08000d;
+        public static final int e_session=0x7f080010;
+        public static final int listLog=0x7f080009;
         public static final int listOfParticipants=0x7f080006;
         public static final int listView1=0x7f080004;
         public static final int listView2=0x7f080002;
-        public static final int m_settlement=0x7f08000d;
-        public static final int p_settlement=0x7f08000e;
-        public static final int sessionMembers=0x7f08000a;
-        public static final int sessionName=0x7f080009;
+        public static final int m_settlement=0x7f08000e;
+        public static final int p_settlement=0x7f08000f;
+        public static final int sessionMembers=0x7f08000b;
+        public static final int sessionName=0x7f08000a;
         public static final int sliding_pane_layout=0x7f080000;
         public static final int textView1=0x7f080003;
         public static final int textView2=0x7f080001;
-        public static final int x_session=0x7f080011;
+        public static final int x_session=0x7f080012;
     }
     public static final class layout {
         public static final int control_board=0x7f030000;
@@ -69,6 +70,7 @@ public final class R {
         public static final int done=0x7f050010;
         public static final int edit_session=0x7f050005;
         public static final int end_session=0x7f05001a;
+        public static final int enter_amount=0x7f050021;
         public static final int enter_expenditure_per_person=0x7f050016;
         public static final int expense_label=0x7f050015;
         public static final int from_contacts=0x7f050013;
@@ -81,11 +83,15 @@ public final class R {
         public static final int ok=0x7f05001d;
         public static final int participant_name=0x7f05000f;
         public static final int propose_settlements=0x7f050019;
+        public static final int provider_label=0x7f050023;
         public static final int select_multiple_participants=0x7f050014;
+        public static final int select_payee=0x7f050020;
+        public static final int select_payer=0x7f05001f;
         public static final int select_paying_participant=0x7f05001b;
         public static final int select_receiving_particitpant=0x7f05001c;
         public static final int session_log=0x7f050007;
         public static final int session_name=0x7f050008;
+        public static final int settlement_statement=0x7f050022;
     }
     public static final class style {
         /** 
