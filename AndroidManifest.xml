@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="14" />
+        android:minSdkVersion="11"
+        android:targetSdkVersion="17" />
 
     <application
         android:allowBackup="true"
@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.xteam.raincheque.ListOfParticipantsActivity" />
-        
+        <activity android:name="com.xteam.raincheque.LogActivity" />
     </application>
 
 </manifest>

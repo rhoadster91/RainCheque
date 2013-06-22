@@ -110,7 +110,9 @@ public class ControlBoardActivity extends Activity
 		{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
 			{				
-							
+				RainChequeApplication.currentSession = (SessionRecord)activeSessionList.getItemAtPosition(arg2);
+				Intent showLog = new Intent(ControlBoardActivity.this, LogActivity.class);
+				startActivity(showLog);
 			}
 
 			
@@ -176,7 +178,9 @@ public class ControlBoardActivity extends Activity
 		{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
 			{				
-							
+				RainChequeApplication.currentSession = (SessionRecord)inactiveSessionList.getItemAtPosition(arg2);
+				Intent showLog = new Intent(ControlBoardActivity.this, LogActivity.class);
+				startActivity(showLog);
 			}
 
 			

@@ -11,4 +11,5 @@ public class SessionRecord implements Serializable
 	String label;
 	boolean isActive = true;
 	ArrayList<AccountRecord> accountList;
+	ArrayList<LogEntry> sessionLog;
 }
