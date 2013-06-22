@@ -45,8 +45,7 @@ public class PaymentActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.payment_activity);
 		tempAccountList = new ArrayList<AccountRecord>();
-		payments = new ArrayList<PerIdPayment>();
-		debts = new ArrayList<PerIdPayment>();
+		payments = new ArrayList<PerIdPayment>();		
 		ids = new ArrayList<Integer>();
 		int i = 0;
 		for(AccountRecord a:RainChequeApplication.currentSession.accountList)
@@ -92,6 +91,8 @@ public class PaymentActivity extends Activity
 	        	    {
 	        	    	ListView list = ((AlertDialog)dialog).getListView();	        	    	
 	        	    	ArrayList<String> participants = new ArrayList<String>();
+	        	    	debts = new ArrayList<PerIdPayment>();	
+	        	    	participantCount = 0;
 	        	    	for (int i=0; i<list.getCount(); i++) 
 	        	    	{
 	        	    		boolean checked = list.isItemChecked(i);
@@ -179,8 +180,7 @@ public class PaymentActivity extends Activity
 	        	    	now.setToNow();
 	        	    	String date = DateFormat.format("d MMMM yyyy", Calendar.getInstance()).toString();
 	        	    	logEntry.time = now.format(date + " at %I:%M:%S");				        	    	
-	        	    	RainChequeApplication.currentSession.sessionLog.add(logEntry); 
-	        	    	RainChequeApplication.writeAccountsToFile(getApplicationContext());
+	        	    	RainChequeApplication.currentSession.sessionLog.add(logEntry); 	        	    	
 					}
 					for(SessionRecord s:RainChequeApplication.sessionList)
         			{
@@ -191,6 +191,7 @@ public class PaymentActivity extends Activity
         					break;
         				}
         			}
+					RainChequeApplication.writeAccountsToFile(getApplicationContext());
 					onBackPressed();
 					
 				}
