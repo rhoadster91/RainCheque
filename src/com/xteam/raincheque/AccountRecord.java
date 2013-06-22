@@ -6,37 +6,12 @@ public class AccountRecord implements Serializable
 {
 	private static final long serialVersionUID = -8693621364691235101L;
 	String name;
-	int paid;
-	int worth;
-	int settlement;
-	public String getName() 
-	{
-		return name;
-	}
+	int paid = 0;
+	int worth = 0;
+	int settlement = 0;
 	
-	public void setName(String name) 
+	int getBalance()
 	{
-		this.name = name;
+		return (paid - worth - settlement);
 	}
-	
-	public int getPaid() 
-	{
-		return paid;
-	}
-	
-	public void setPaid(int paid) 
-	{
-		this.paid = paid;
-	}
-	
-	public int getSettlement() 
-	{
-		return settlement;
-	}
-	
-	public void setSettlement(int settlement) 
-	{
-		this.settlement = settlement;
-	}
-
 }
