@@ -16,6 +16,7 @@ public class RainChequeApplication extends Application
 	private static String LOCAL_FILE_FOR_ACCOUNTS = "session_list";
 	protected static SessionRecord currentSession;
 	protected static ArrayList<SessionRecord> sessionList;
+	protected static final String ACTION_SHOW_TOUR = "RainChequeActionShowTour";
 	
 	protected static void writeAccountsToFile(Context context) 
 	{

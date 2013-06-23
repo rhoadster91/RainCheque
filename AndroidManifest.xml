@@ -16,8 +16,9 @@
         
         
         <activity
-            android:name="com.xteam.raincheque.ControlBoardActivity"
-            android:label="@string/app_name" >
+            android:name="com.xteam.raincheque.SplashActivity"
+            android:label="@string/app_name" 
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,6 +29,7 @@
         <activity android:name="com.xteam.raincheque.LogActivity" />
         <activity android:name="com.xteam.raincheque.SuggestionActivity" />
         <activity android:name="com.xteam.raincheque.PaymentActivity" />
+        <activity android:name="com.xteam.raincheque.ControlBoardActivity" />
     </application>
 
 </manifest>

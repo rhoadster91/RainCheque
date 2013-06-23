@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="#FFFFFF"
+    android:gravity="bottom|center_horizontal"
+    android:orientation="horizontal"
+    android:padding="15dip" >
+
+        <ImageView
+            android:id="@+id/pageIndicator1"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:src="@drawable/ring_on" />
+
+        <View
+            android:layout_width="5dp"
+            android:layout_height="0dp" />
+
+
+        <ImageView
+            android:id="@+id/pageIndicator2"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:src="@drawable/ring_off" />
+        <View
+            android:layout_width="5dp"
+            android:layout_height="0dp" />
+        <ImageView
+            android:id="@+id/pageIndicator3"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:src="@drawable/ring_off" />
+        <View
+            android:layout_width="5dp"
+            android:layout_height="0dp" />
+        <ImageView
+            android:id="@+id/pageIndicator4"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:src="@drawable/ring_off" />
+        <View
+            android:layout_width="5dp"
+            android:layout_height="0dp" />
+        <ImageView
+            android:id="@+id/pageIndicator5"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:src="@drawable/ring_off" />
+
+</LinearLayout>

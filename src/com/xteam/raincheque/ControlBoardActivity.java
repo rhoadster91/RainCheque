@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.text.InputType;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -230,6 +231,21 @@ public class ControlBoardActivity extends Activity
 	{
 		getMenuInflater().inflate(R.menu.control_board, menu);
 		return true;
+	}
+
+	
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) 
+	{
+		switch(item.getItemId())
+		{
+		case R.id.action_help:
+			Intent toSplashActivity = new Intent(ControlBoardActivity.this, SplashActivity.class);
+			toSplashActivity.setAction(RainChequeApplication.ACTION_SHOW_TOUR);
+			startActivity(toSplashActivity);
+			break;
+		}
+		return super.onMenuItemSelected(featureId, item);
 	}
 
 	@Override

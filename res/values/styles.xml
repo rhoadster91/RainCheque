@@ -16,10 +16,15 @@
     <style name="AppTheme" parent="android:Theme.Holo">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    <style name="SplashTheme" parent="android:Theme.Holo.Light.NoActionBar">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+	
 	<style name="ButtonBar" parent="@android:style/Holo.ButtonBar">
 	    
 	</style>
 	<style name="ButtonBarButton" parent="@android:style/Widget.Holo.Button.Borderless">
     
 </style>
+
 </resources>
