@@ -33,7 +33,6 @@ public class PaymentActivity extends Activity
 	ArrayList<PerIdPayment> payments;
 	ArrayList<PerIdPayment> debts;
 	int subtotal = 0, participantCount = 0;
-	boolean isLabelOK = false;
 	
 	private class PerIdPayment
 	{
