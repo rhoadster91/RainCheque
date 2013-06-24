@@ -66,6 +66,7 @@
 	<string name="gotit">Got it!</string>
 	<string name="change">Change</string>
 	<string name="select_theme">Select application theme</string>
+	<string name="switch_theme">Switch theme</string>
 	<string name="white">White theme</string>
 	<string name="dark">Dark theme</string>
 </resources>

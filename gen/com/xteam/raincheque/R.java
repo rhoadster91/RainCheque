@@ -50,8 +50,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class id {
         public static final int LinearLayout1=0x7f080019;
-        public static final int a_participant=0x7f080025;
-        public static final int action_help=0x7f080020;
+        public static final int a_participant=0x7f080026;
+        public static final int action_help=0x7f080021;
+        public static final int action_switch_theme=0x7f080020;
         public static final int bDonePayments=0x7f080010;
         public static final int button1=0x7f080005;
         public static final int buttonAddInvolvedParticipants=0x7f08000c;
@@ -61,8 +62,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int buttonGotIt=0x7f08001f;
         public static final int buttonShowTour=0x7f080015;
         public static final int buttonSkipTour=0x7f080016;
-        public static final int conf_payment=0x7f080021;
-        public static final int e_session=0x7f080024;
+        public static final int conf_payment=0x7f080022;
+        public static final int e_session=0x7f080025;
         public static final int editTextLabel=0x7f08000a;
         public static final int imageView1=0x7f080013;
         public static final int imageView2=0x7f080014;
@@ -73,8 +74,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int listSuggestions=0x7f080017;
         public static final int listView1=0x7f080004;
         public static final int listView2=0x7f080002;
-        public static final int m_settlement=0x7f080022;
-        public static final int p_settlement=0x7f080023;
+        public static final int m_settlement=0x7f080023;
+        public static final int p_settlement=0x7f080024;
         public static final int pageIndicator1=0x7f08001a;
         public static final int pageIndicator2=0x7f08001b;
         public static final int pageIndicator3=0x7f08001c;
@@ -87,7 +88,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int textView2=0x7f080001;
         public static final int textView4=0x7f08000d;
         public static final int viewPager=0x7f080018;
-        public static final int x_session=0x7f080026;
+        public static final int x_session=0x7f080027;
     }
     public static final class layout {
         public static final int control_board=0x7f030000;
@@ -133,7 +134,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int choose_session_action=0x7f050009;
         public static final int closed_sessions=0x7f050003;
         public static final int confirm_payment=0x7f050018;
-        public static final int dark=0x7f050042;
+        public static final int dark=0x7f050043;
         public static final int delete_session=0x7f05000b;
         public static final int done=0x7f050010;
         public static final int edit_session=0x7f050005;
@@ -174,8 +175,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int settlement_proposal=0x7f050024;
         public static final int settlement_statement=0x7f050023;
         public static final int suggestion=0x7f050025;
+        public static final int switch_theme=0x7f050041;
         public static final int tagline=0x7f050030;
-        public static final int white=0x7f050041;
+        public static final int white=0x7f050042;
         public static final int yes_sure=0x7f050032;
     }
     public static final class style {

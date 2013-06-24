@@ -3,9 +3,11 @@ package com.xteam.raincheque;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.text.InputType;
@@ -238,12 +240,44 @@ public class ControlBoardActivity extends ThemedActivity
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) 
 	{
+		final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());		
 		switch(item.getItemId())
 		{
 		case R.id.action_help:
 			Intent toSplashActivity = new Intent(ControlBoardActivity.this, SplashActivity.class);
 			toSplashActivity.setAction(RainChequeApplication.ACTION_SHOW_TOUR);
 			startActivity(toSplashActivity);
+			break;
+		case R.id.action_switch_theme:			
+			AlertDialog.Builder builder = new AlertDialog.Builder(ControlBoardActivity.this);
+	    	builder.setTitle(getString(R.string.select_theme));
+	    	String []themeList = new String[2];
+	    	themeList[0] = getString(R.string.white);
+	    	themeList[1] = getString(R.string.dark);
+	    	int x;
+	    	if(sharedPref.getBoolean("black theme", false))
+	    		x = 1;
+	    	else
+	    		x = 0;	    		
+	    	builder.setSingleChoiceItems(themeList, x, new DialogInterface.OnClickListener()
+	    	{
+				@Override
+				public void onClick(DialogInterface dialog, int which) 
+				{
+					boolean isBlackSelected;
+					if(which==0)
+						isBlackSelected = false;
+					else
+						isBlackSelected = true;
+					SharedPreferences.Editor prefEditor = sharedPref.edit();    	    	
+					prefEditor.putBoolean("black theme", isBlackSelected);
+					prefEditor.commit();
+					finish();
+					Intent toMainActivity = new Intent(ControlBoardActivity.this, ControlBoardActivity.class);
+					startActivity(toMainActivity);					
+				}    		
+	    	});
+	    	builder.show();
 			break;
 		}
 		return super.onMenuItemSelected(featureId, item);
