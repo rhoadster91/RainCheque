@@ -300,7 +300,7 @@ public class ControlBoardActivity extends ThemedActivity
 					try 
 					{						
 						FileInputStream fIn = new FileInputStream(file);
-						byte []bytes = new byte[10000];
+						byte []bytes = new byte[(int)file.length()];
 						fIn.read(bytes);
 						ByteArrayInputStream b = new ByteArrayInputStream(bytes);
 						ObjectInputStream objIn = new ObjectInputStream(b);

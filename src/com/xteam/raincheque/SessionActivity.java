@@ -329,6 +329,7 @@ public class SessionActivity extends ThemedActivity
 			
 			FileDialog exportDialog = new FileDialog(this, new File(""));
 	        exportDialog.selectDirectoryOption = true;
+	        exportDialog.fileEndsWith = null;
 	        exportDialog.showDialog();
 	        exportDialog.addDirectoryListener(new DirectorySelectedListener()
 	        {

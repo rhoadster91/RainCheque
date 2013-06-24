@@ -83,7 +83,7 @@
 	<string name="inactive">CLOSED</string>
 	<string name="no_name">The contact you\'ve picked has no name.</string>
 	<string name="export">Export</string>
-	<string name="export_as">Export as...</string>
+	<string name="export_as">Export as&#8230;</string>
 	<string name="export_desc">File exported successfully</string>
 	<string name="import_file">Import</string>
 	<string name="share">Share</string>

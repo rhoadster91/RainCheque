@@ -13,18 +13,22 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 
-public class FileDialog {
+public class FileDialog
+{
     private static final String PARENT_DIR = "..";
-    private String[] fileList;
+    private List<String> fileList;
     private File currentPath;
     private ListenerList<FileSelectedListener> fileListenerList = new ListenerList<FileDialog.FileSelectedListener>();
     private ListenerList<DirectorySelectedListener> dirListenerList = new ListenerList<FileDialog.DirectorySelectedListener>();
     private final Activity activity;
     protected boolean selectDirectoryOption;
     protected String fileEndsWith;    
+    private int directoryCount = 0;
 
     public interface FileSelectedListener
     {
@@ -48,22 +52,35 @@ public class FileDialog {
     {
         Dialog dialog = null;
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(currentPath.getPath());
-        if (selectDirectoryOption) 
+        List<Integer> icons = new ArrayList<Integer>();
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
+		int fileIcon, folderIcon;
+        if(sharedPref.getBoolean("black theme", false))
+		{
+			fileIcon = R.drawable.file_dark;
+			folderIcon = R.drawable.folder_dark;
+		}
+		else
+		{
+			fileIcon = R.drawable.file_light;
+			folderIcon = R.drawable.folder_light;
+		}
+        for(int i=0;i<fileList.size();i++)
         {
-            builder.setPositiveButton("Select directory", new OnClickListener() 
-            {
-                public void onClick(DialogInterface dialog, int which) 
-                {
-                   fireDirectorySelectedEvent(currentPath);
-                }
-            });
+        	
+        	
+        	if(i<directoryCount)
+        		icons.add(folderIcon);
+        	else
+        		icons.add(fileIcon);
         }
-        builder.setItems(fileList, new DialogInterface.OnClickListener() 
+        FileListAdapter adapter = new FileListAdapter(activity, fileList, icons);
+
+        builder.setAdapter(adapter, new DialogInterface.OnClickListener() 
         {
             public void onClick(DialogInterface dialog, int which) 
             {
-                String fileChosen = fileList[which];
+                String fileChosen = fileList.get(which);
                 File chosenFile = getChosenFile(fileChosen);
                 if (chosenFile.isDirectory()) 
                 {
@@ -76,6 +93,17 @@ public class FileDialog {
                 	fireFileSelectedEvent(chosenFile);
             }
         });
+        builder.setTitle(currentPath.getPath());
+        if (selectDirectoryOption) 
+        {
+            builder.setPositiveButton("Select directory", new OnClickListener() 
+            {
+                public void onClick(DialogInterface dialog, int which) 
+                {
+                   fireDirectorySelectedEvent(currentPath);
+                }
+            });
+        }
         dialog = builder.show();
         return dialog;
     }
@@ -141,6 +169,16 @@ public class FileDialog {
         {
             if (path.getParentFile() != null) 
             	r.add(PARENT_DIR);
+            FilenameFilter directoryFilter = new FilenameFilter() 
+            {
+                public boolean accept(File dir, String filename) 
+                {
+                    File sel = new File(dir, filename);
+                    if (!sel.canRead()) 
+                    	return false;
+                    return sel.isDirectory();                    
+                }
+            };
             FilenameFilter filter = new FilenameFilter() 
             {
                 public boolean accept(File dir, String filename) 
@@ -148,23 +186,26 @@ public class FileDialog {
                     File sel = new File(dir, filename);
                     if (!sel.canRead()) 
                     	return false;
-                    if (selectDirectoryOption) 
-                    	return sel.isDirectory();
-                    else
-                    {
-                        boolean endsWith = fileEndsWith != null ? filename.toLowerCase(Locale.getDefault()).endsWith(fileEndsWith) : false;
-                        return endsWith || sel.isDirectory();
-                    }
+                    boolean endsWith = fileEndsWith != null ? filename.toLowerCase(Locale.getDefault()).endsWith(fileEndsWith) : false;
+                    return endsWith;                    
                 }
             };
-            String[] fileList1 = path.list(filter);
-            Arrays.sort(fileList1);
-            for (String file : fileList1) 
+            String[] directoryList = path.list(directoryFilter);            
+            Arrays.sort(directoryList);
+            String[] restFileList = path.list(filter);
+            Arrays.sort(restFileList);
+            for(String file : directoryList)
+            	r.add(file);
+            directoryCount = r.size();
+            if(!selectDirectoryOption)
             {
-                r.add(file);
+            	for (String file : restFileList)             
+            		r.add(file);
             }
+            
         }
-        fileList = (String[]) r.toArray(new String[]{});
+        
+        fileList = r;
     }
 
     private File getChosenFile(String fileChosen) 
