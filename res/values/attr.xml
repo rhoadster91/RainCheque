@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+      <attr name="rowColour" format="reference" />
+       <attr name="rowColourInverse" format="reference" />
+      <attr name="backdrop" format="reference" />
+  <attr name="buttonBar" format="reference" />
+</resources>

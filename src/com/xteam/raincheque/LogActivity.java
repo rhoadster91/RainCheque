@@ -20,7 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class LogActivity extends Activity
+public class LogActivity extends ThemedActivity
 {
 	int payerID, payeeID;
 	ListView logList = null;
@@ -114,7 +114,7 @@ public class LogActivity extends Activity
 		case R.id.m_settlement:
 			builder = new AlertDialog.Builder(LogActivity.this);
         	builder.setTitle(getString(R.string.select_payer));
-        	builder.setAdapter(new ParticipantListAdapter(getApplicationContext(), RainChequeApplication.currentSession.accountList.toArray()), new DialogInterface.OnClickListener() 
+        	builder.setAdapter(new ParticipantListAdapter(LogActivity.this, RainChequeApplication.currentSession.accountList.toArray()), new DialogInterface.OnClickListener() 
         	{				
 				@Override
 				public void onClick(DialogInterface dialog, int which) 
@@ -131,7 +131,7 @@ public class LogActivity extends Activity
 					payerID = which;
 					AlertDialog.Builder builder = new AlertDialog.Builder(LogActivity.this);
     	        	builder.setTitle(getString(R.string.select_payee));
-    	        	builder.setAdapter(new ParticipantListAdapter(getApplicationContext(), payeeList), new DialogInterface.OnClickListener()
+    	        	builder.setAdapter(new ParticipantListAdapter(LogActivity.this, payeeList), new DialogInterface.OnClickListener()
     	        	{
 
 						@Override
@@ -215,7 +215,7 @@ public class LogActivity extends Activity
 		case R.id.e_session:
 			builder = new AlertDialog.Builder(LogActivity.this);
         	builder.setTitle(getString(R.string.edit_session));
-        	LinearLayout lila = new LinearLayout(getApplicationContext());
+        	LinearLayout lila = new LinearLayout(LogActivity.this);
         	lila.setOrientation(LinearLayout.VERTICAL);
         	TextView tv = new TextView(LogActivity.this);
         	tv.setText(getString(R.string.session_name));
@@ -312,7 +312,7 @@ public class LogActivity extends Activity
 	private void refreshList()
 	{
 		logList = (ListView)findViewById(R.id.listLog);
-		logAdapter = new LogAdapter(getApplicationContext(), RainChequeApplication.currentSession.sessionLog.toArray());
+		logAdapter = new LogAdapter(LogActivity.this, RainChequeApplication.currentSession.sessionLog.toArray());
 		logList.setAdapter(logAdapter);			
 	}
 }

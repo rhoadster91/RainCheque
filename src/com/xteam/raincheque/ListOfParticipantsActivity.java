@@ -20,7 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class ListOfParticipantsActivity<CurrentActivity> extends Activity
+public class ListOfParticipantsActivity<CurrentActivity> extends ThemedActivity
 {
 	ListView participantList = null;
 	ParticipantListAdapter participantAdapter = null;
@@ -119,7 +119,7 @@ public class ListOfParticipantsActivity<CurrentActivity> extends Activity
 	private void refreshList()
 	{
 		participantList = (ListView)findViewById(R.id.listOfParticipants);
-		participantAdapter = new ParticipantListAdapter(getApplicationContext(), RainChequeApplication.currentSession.accountList.toArray());
+		participantAdapter = new ParticipantListAdapter(this, RainChequeApplication.currentSession.accountList.toArray());
 		participantList.setAdapter(participantAdapter);	
 		participantList.setClickable(true);
 		participantList.setOnItemClickListener(new OnItemClickListener()

@@ -1,6 +1,8 @@
 package com.xteam.raincheque;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -22,7 +24,7 @@ public class SplashActivity extends Activity
 	SplashPagerAdapter adapter;
 	ViewPager viewPager;
 	boolean calledByHelp = false;
-	
+	boolean isBlackSelected = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -59,12 +61,10 @@ public class SplashActivity extends Activity
 			@Override
 			public void onClick(View v) 
 			{
+				promptToSelectTheme();				
 				SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
 				prefEditor.putBoolean("first time", false);
-				prefEditor.commit();
-				Intent toMainActivity = new Intent(SplashActivity.this, ControlBoardActivity.class);
-				startActivity(toMainActivity);
-				finish();
+				prefEditor.commit();				
 			}
 			
 		});
@@ -137,12 +137,10 @@ public class SplashActivity extends Activity
 								onBackPressed();
 							else
 							{
+								promptToSelectTheme();
 								SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
 								prefEditor.putBoolean("first time", false);
-								prefEditor.commit();
-								Intent toMainActivity = new Intent(SplashActivity.this, ControlBoardActivity.class);
-								startActivity(toMainActivity);
-								finish();
+								prefEditor.commit();																								
 							}
 						}
 						
@@ -151,5 +149,38 @@ public class SplashActivity extends Activity
 			}
 		});
 	}
+
+	private void promptToSelectTheme()
+	{
+		final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		if(sharedPref.getBoolean("first time", true))
+		{
+			AlertDialog.Builder builder = new AlertDialog.Builder(SplashActivity.this);
+	    	builder.setTitle(getString(R.string.select_theme));
+	    	String []themeList = new String[2];
+	    	themeList[0] = getString(R.string.white);
+	    	themeList[1] = getString(R.string.dark);
+	    	builder.setSingleChoiceItems(themeList, -1, new DialogInterface.OnClickListener()
+	    	{
+				@Override
+				public void onClick(DialogInterface dialog, int which) 
+				{
+					if(which==0)
+						isBlackSelected = false;
+					else
+						isBlackSelected = true;
+					SharedPreferences.Editor prefEditor = sharedPref.edit();    	    	
+					prefEditor.putBoolean("black theme", isBlackSelected);
+					prefEditor.commit();
+					Intent toMainActivity = new Intent(SplashActivity.this, ControlBoardActivity.class);
+					startActivity(toMainActivity);	
+					finish();
+				}    		
+	    	});
+	    	builder.show();
+		}
+	}
+	
+	
 
 }

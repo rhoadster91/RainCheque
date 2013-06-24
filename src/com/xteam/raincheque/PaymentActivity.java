@@ -3,7 +3,6 @@ package com.xteam.raincheque;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,7 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class PaymentActivity extends Activity 
+public class PaymentActivity extends ThemedActivity 
 {
 	Button bAddParticipants;
 	Button bAddPayers;
@@ -221,7 +220,7 @@ public class PaymentActivity extends Activity
 				}	
 				AlertDialog.Builder builder = new AlertDialog.Builder(PaymentActivity.this);
 	        	builder.setTitle(getString(R.string.select_payer));
-	        	builder.setAdapter(new ParticipantListAdapter(getApplicationContext(), tempAccountList.toArray()), new DialogInterface.OnClickListener()
+	        	builder.setAdapter(new ParticipantListAdapter(PaymentActivity.this, tempAccountList.toArray()), new DialogInterface.OnClickListener()
 	        	{
 					@Override
 					public void onClick(DialogInterface dialog, int which) 
@@ -244,7 +243,7 @@ public class PaymentActivity extends Activity
 			        	    	payment.id = ids.get(whichPayer);
 								tempAccountList.remove(whichPayer);
 								ids.remove(whichPayer);								
-			        	    	LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			        	    	LayoutInflater vi = (LayoutInflater) PaymentActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			        	    	View v = vi.inflate(R.layout.session_row, null);
 			        	    	LinearLayout lila = (LinearLayout)findViewById(R.id.listOfPayers); 
 			        	    	lila.addView(v);			        	    	

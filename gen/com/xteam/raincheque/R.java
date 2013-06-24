@@ -9,6 +9,22 @@ package com.xteam.raincheque;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int backdrop=0x7f010002;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int buttonBar=0x7f010003;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int rowColour=0x7f010000;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int rowColourInverse=0x7f010001;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -117,6 +133,7 @@ public final class R {
         public static final int choose_session_action=0x7f050009;
         public static final int closed_sessions=0x7f050003;
         public static final int confirm_payment=0x7f050018;
+        public static final int dark=0x7f050042;
         public static final int delete_session=0x7f05000b;
         public static final int done=0x7f050010;
         public static final int edit_session=0x7f050005;
@@ -150,6 +167,7 @@ public final class R {
         public static final int select_paying_participant=0x7f05001c;
         public static final int select_paying_participants=0x7f050015;
         public static final int select_receiving_particitpant=0x7f05001d;
+        public static final int select_theme=0x7f050040;
         public static final int selected_participants=0x7f050028;
         public static final int session_log=0x7f050007;
         public static final int session_name=0x7f050008;
@@ -157,14 +175,11 @@ public final class R {
         public static final int settlement_statement=0x7f050023;
         public static final int suggestion=0x7f050025;
         public static final int tagline=0x7f050030;
+        public static final int white=0x7f050041;
         public static final int yes_sure=0x7f050032;
     }
     public static final class style {
         /** 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    
-
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
@@ -183,13 +198,20 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
-        public static final int ButtonBar=0x7f060003;
-        public static final int ButtonBarButton=0x7f060004;
+        public static final int AppTheme=0x7f060005;
         /**  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int SplashTheme=0x7f060002;
+        public static final int AppThemeLight=0x7f060006;
+        public static final int ButtonBar=0x7f060008;
+        public static final int ButtonBarButton=0x7f060009;
+        public static final int ButtonBarButtonLight=0x7f06000a;
+        /**  All customizations that are NOT specific to a particular API-level can go here. 
+         */
+        public static final int SplashTheme=0x7f060007;
+        public static final int backdropBlackGrey=0x7f060003;
+        public static final int backdropWhiteGrey=0x7f060004;
+        public static final int text_black=0x7f060002;
+        public static final int text_white=0x7f060001;
     }
 }

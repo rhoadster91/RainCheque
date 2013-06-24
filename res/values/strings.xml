@@ -65,4 +65,7 @@
 	<string name="chapter5text">Finally, when it\'s time to end the session (or when you feel like settlements are due) let the app do it\'s magic. The app will tell you exactly who owes how much and to whom.</string>
 	<string name="gotit">Got it!</string>
 	<string name="change">Change</string>
+	<string name="select_theme">Select application theme</string>
+	<string name="white">White theme</string>
+	<string name="dark">Dark theme</string>
 </resources>

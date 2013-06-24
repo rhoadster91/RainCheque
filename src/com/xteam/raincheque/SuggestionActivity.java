@@ -2,11 +2,10 @@ package com.xteam.raincheque;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ListView;
 
-public class SuggestionActivity extends Activity 
+public class SuggestionActivity extends ThemedActivity 
 {
 
 	ArrayList<LogEntry> logEntries = new ArrayList<LogEntry>();
@@ -20,7 +19,7 @@ public class SuggestionActivity extends Activity
 		setContentView(R.layout.suggestions_activity);
 		calculateSettlements();
 		logList = (ListView)findViewById(R.id.listSuggestions);
-		logAdapter = new LogAdapter(getApplicationContext(), logEntries.toArray());
+		logAdapter = new LogAdapter(this, logEntries.toArray());
 		logList.setAdapter(logAdapter);
 	}
 	

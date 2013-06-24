@@ -3,7 +3,6 @@ package com.xteam.raincheque;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,7 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
-public class ControlBoardActivity extends Activity 
+public class ControlBoardActivity extends ThemedActivity 
 {
 	ListView activeSessionList = null;
 	ListView inactiveSessionList = null;
@@ -38,7 +37,7 @@ public class ControlBoardActivity extends Activity
 		RainChequeApplication.readAccountsFromFile(getApplicationContext());		
 		refreshList();
 		SlidingPaneLayout slidingPane = (SlidingPaneLayout)findViewById(R.id.sliding_pane_layout);
-		slidingPane.setSliderFadeColor(Color.BLACK);
+		slidingPane.setSliderFadeColor(Color.TRANSPARENT);
 		Button bCreateSession = (Button)findViewById(R.id.button1);
 		bCreateSession.setOnClickListener(new OnClickListener()
 		{
@@ -106,7 +105,7 @@ public class ControlBoardActivity extends Activity
 			else
 				inactiveSessions.add(s);
 		}
-		activeSessionListAdapter = new SessionListAdapter(getApplicationContext(), activeSessions.toArray());
+		activeSessionListAdapter = new SessionListAdapter(this, activeSessions.toArray());
 		activeSessionList.setAdapter(activeSessionListAdapter);	
 		activeSessionList.setClickable(true);
 		activeSessionList.setOnItemClickListener(new OnItemClickListener()
@@ -174,7 +173,7 @@ public class ControlBoardActivity extends Activity
 
 		});
 		
-		inactiveSessionListAdapter = new SessionListAdapter(getApplicationContext(), inactiveSessions.toArray());
+		inactiveSessionListAdapter = new SessionListAdapter(this, inactiveSessions.toArray());
 		inactiveSessionList.setAdapter(inactiveSessionListAdapter);	
 		inactiveSessionList.setClickable(true);
 		inactiveSessionList.setOnItemClickListener(new OnItemClickListener()
