@@ -158,6 +158,26 @@ public class ListOfParticipantsActivity<CurrentActivity> extends ThemedActivity
 	        {
 	            int idx = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
 	            String name = cursor.getString(idx);
+	            if(name==null)
+	            {
+	            	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		        	builder.setTitle(getString(R.string.oops));
+		        	TextView tv = new TextView(this);
+		        	tv.setText(R.string.no_name);
+		        	tv.setTextAppearance(this, android.R.style.TextAppearance_Large);
+    	        	tv.setPadding(30, 30, 30, 30);
+		        	builder.setView(tv);
+		        	builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() 
+		        	{
+		        	    public void onClick(DialogInterface dialog, int which) 
+		        	    {
+		        	        dialog.cancel();
+		        	    }
+		        	});
+		        	builder.show();
+	            	refreshList();
+	            	return;
+	            }
 	            AccountRecord a = new AccountRecord();
     	    	a.name = name;
     	    	RainChequeApplication.currentSession.accountList.add(a);

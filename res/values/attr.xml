@@ -4,4 +4,7 @@
        <attr name="rowColourInverse" format="reference" />
       <attr name="backdrop" format="reference" />
   <attr name="buttonBar" format="reference" />
+  <attr name="actionBarIconExport" format="reference" />
+  <attr name="actionBarIconImport" format="reference" />
+  <attr name="actionBarIconShare" format="reference" />
 </resources>

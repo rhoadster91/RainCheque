@@ -1,6 +1,13 @@
 package com.xteam.raincheque;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
+
+import com.xteam.raincheque.FileDialog.FileSelectedListener;
 
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -279,6 +286,47 @@ public class ControlBoardActivity extends ThemedActivity
 				}    		
 	    	});
 	    	builder.show();
+			break;
+		case R.id.importFile:
+			FileDialog selectFile = new FileDialog(this, new File(""));
+			selectFile.fileEndsWith = new String(".rcs");
+			selectFile.showDialog();
+			selectFile.addFileListener(new FileSelectedListener()
+			{
+
+				@Override
+				public void fileSelected(File file) 
+				{
+					try 
+					{						
+						FileInputStream fIn = new FileInputStream(file);
+						byte []bytes = new byte[10000];
+						fIn.read(bytes);
+						ByteArrayInputStream b = new ByteArrayInputStream(bytes);
+						ObjectInputStream objIn = new ObjectInputStream(b);
+						SessionRecord mySession = (SessionRecord)objIn.readObject();
+						if(RainChequeApplication.sessionList.size()>0)
+							mySession.sessionID = RainChequeApplication.sessionList.get(RainChequeApplication.sessionList.size() - 1).sessionID + 1;
+						else
+							mySession.sessionID = 1;
+						RainChequeApplication.sessionList.add(mySession);
+						RainChequeApplication.writeAccountsToFile(getApplicationContext());
+						refreshList();
+					} 
+					catch (IOException e) 
+					{
+						e.printStackTrace();
+					} 
+					catch (ClassNotFoundException e) 
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+				}
+				
+			});
 			break;
 		}
 		return super.onMenuItemSelected(featureId, item);

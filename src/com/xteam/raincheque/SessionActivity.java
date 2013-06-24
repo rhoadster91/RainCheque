@@ -1,6 +1,13 @@
 package com.xteam.raincheque;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Calendar;
+
+import com.xteam.raincheque.FileDialog.DirectorySelectedListener;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -9,6 +16,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.ContactsContract;
 import android.text.InputType;
 import android.text.format.DateFormat;
@@ -32,7 +40,6 @@ public class SessionActivity extends ThemedActivity
 	int payerID, payeeID;
 	ListView participantList = null;
 	ParticipantListAdapter participantAdapter = null;
-		
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{		
@@ -44,7 +51,6 @@ public class SessionActivity extends ThemedActivity
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) 
 	{		
-		getMenuInflater().inflate(R.menu.log, menu);
 		menu.findItem(R.id.m_settlement).setVisible(false);			
 		menu.findItem(R.id.a_participant).setVisible(false);
 		menu.findItem(R.id.e_session).setVisible(false);
@@ -61,6 +67,13 @@ public class SessionActivity extends ThemedActivity
 		return true;
 	}
 	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) 
+	{
+		getMenuInflater().inflate(R.menu.log, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item)
 	{
@@ -284,7 +297,91 @@ public class SessionActivity extends ThemedActivity
 			Intent showLog = new Intent(SessionActivity.this, LogActivity.class);
 			startActivity(showLog);
 			break;
-		
+			
+		case R.id.share_session:
+			try 
+			{				
+				ByteArrayOutputStream b = new ByteArrayOutputStream();
+		        ObjectOutputStream o = new ObjectOutputStream(b);
+		        o.writeObject(RainChequeApplication.currentSession);
+		        byte []bytes = b.toByteArray();
+		        File storagePath = new File(Environment.getExternalStorageDirectory() + "/RainCheque/"); 
+		        storagePath.mkdirs(); 
+		        File myFile = new File(storagePath, RainChequeApplication.currentSession.label + ".rcs");
+		        myFile.createNewFile();
+	            FileOutputStream fOut = new FileOutputStream(myFile);
+	            fOut.write(bytes);
+	            fOut.close();
+	            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+	            shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+	            shareIntent.setType("file/*");	            
+	            Uri uri = Uri.fromFile(myFile);
+	            shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+	            startActivity(Intent.createChooser(shareIntent, "Share Tag"));
+			}
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+			
+			break;
+		case R.id.export_session:
+			
+			FileDialog exportDialog = new FileDialog(this, new File(""));
+	        exportDialog.selectDirectoryOption = true;
+	        exportDialog.showDialog();
+	        exportDialog.addDirectoryListener(new DirectorySelectedListener()
+	        {
+				@Override
+				public void directorySelected(File directory) 
+				{
+					final File myFile = directory;
+					AlertDialog.Builder builder = new AlertDialog.Builder(SessionActivity.this);
+		        	builder.setTitle(getString(R.string.export_as));
+		        	final EditText input = new EditText(SessionActivity.this);	        	
+		        	input.setInputType(InputType.TYPE_CLASS_TEXT);
+		        	input.setPadding(30, 30, 30, 30);
+		        	input.setText(RainChequeApplication.currentSession.label);
+		        	input.selectAll();
+		        	builder.setView(input);
+		        	builder.setPositiveButton(getString(R.string.done), new DialogInterface.OnClickListener() 
+		        	{ 
+		        	    public void onClick(DialogInterface dialog, int which) 
+		        	    {
+		        	    	try 
+		        			{
+			        	    	ByteArrayOutputStream b = new ByteArrayOutputStream();
+			    		        ObjectOutputStream o = new ObjectOutputStream(b);
+			    		        o.writeObject(RainChequeApplication.currentSession);
+			    		        byte []bytes = b.toByteArray();			    		        
+			        	    	File myNewFile = new File(myFile.getAbsolutePath() + "/" + input.getText().toString() + ".rcs");
+			        	    	myNewFile.createNewFile();
+					            FileOutputStream fOut = new FileOutputStream(myNewFile);
+					            fOut.write(bytes);
+					            fOut.close();
+		        			}
+		        			catch(IOException e)
+		        			{
+		        				e.printStackTrace();
+		        			}
+		        	    }
+		        	});
+		        	builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() 
+		        	{
+		        	    public void onClick(DialogInterface dialog, int which) 
+		        	    {
+		        	        dialog.cancel();
+		        	    }
+		        	});
+
+		        	builder.show();
+					
+				}
+	        	
+	        });
+	       
+			
+	        break;
 		
 		}
 		return super.onMenuItemSelected(featureId, item);
@@ -302,6 +399,8 @@ public class SessionActivity extends ThemedActivity
 	        {
 	            int idx = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
 	            String name = cursor.getString(idx);
+	            if(name==null)            	
+	            	return;	            
 	            AccountRecord a = new AccountRecord();
     	    	a.name = name;
     	    	RainChequeApplication.currentSession.accountList.add(a);
@@ -327,6 +426,11 @@ public class SessionActivity extends ThemedActivity
 	{
 		TextView tvSession = (TextView)findViewById(R.id.tvSessionName);
 		TextView tvTotal = (TextView)findViewById(R.id.tvSessionTotal);
+		if(participantList!=null)
+		{
+			participantList.setOnItemClickListener(null);
+			participantList.setOnItemLongClickListener(null);
+		}
 		tvSession.setText(new String(getString(R.string.session)) + ": " + RainChequeApplication.currentSession.label);
 		int total = 0;
 		for(AccountRecord a: RainChequeApplication.currentSession.accountList)
@@ -349,7 +453,8 @@ public class SessionActivity extends ThemedActivity
 							s.isActive = false;
 					}					
 					RainChequeApplication.currentSession.isActive = false;
-					RainChequeApplication.writeAccountsToFile(getApplicationContext());					
+					RainChequeApplication.writeAccountsToFile(getApplicationContext());	
+					refreshList();
 				}
 				else
 				{
@@ -421,6 +526,7 @@ public class SessionActivity extends ThemedActivity
 			    	        	    public void onClick(DialogInterface dialog, int which) 
 			    	        	    {
 			    	        	        dialog.cancel();
+			    	        	        refreshList();
 			    	        	    }
 			    	        	});
 			    	        	builder.show();
@@ -445,6 +551,7 @@ public class SessionActivity extends ThemedActivity
 						}
 						RainChequeApplication.currentSession.isActive = true;
 						RainChequeApplication.writeAccountsToFile(getApplicationContext());
+						refreshList();
 					}
 				}				
 			}

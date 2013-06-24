@@ -12,6 +12,18 @@ public final class R {
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
+        public static final int actionBarIconExport=0x7f010004;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int actionBarIconImport=0x7f010005;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int actionBarIconShare=0x7f010006;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
         public static final int backdrop=0x7f010002;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -40,17 +52,23 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int balance=0x7f020000;
         public static final int borderui=0x7f020001;
         public static final int differences=0x7f020002;
-        public static final int goingout=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
-        public static final int logo=0x7f020005;
-        public static final int ring_off=0x7f020006;
-        public static final int ring_on=0x7f020007;
-        public static final int settlements=0x7f020008;
-        public static final int somecontribute=0x7f020009;
+        public static final int export_dark=0x7f020003;
+        public static final int export_light=0x7f020004;
+        public static final int goingout=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int import_dark=0x7f020007;
+        public static final int import_light=0x7f020008;
+        public static final int logo=0x7f020009;
+        public static final int ring_off=0x7f02000a;
+        public static final int ring_on=0x7f02000b;
+        public static final int settlements=0x7f02000c;
+        public static final int share_dark=0x7f02000d;
+        public static final int share_light=0x7f02000e;
+        public static final int somecontribute=0x7f02000f;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f08001e;
-        public static final int a_participant=0x7f08002b;
+        public static final int a_participant=0x7f08002c;
         public static final int action_help=0x7f080026;
         public static final int action_switch_theme=0x7f080025;
         public static final int bDonePayments=0x7f080010;
@@ -62,11 +80,13 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int buttonGotIt=0x7f080024;
         public static final int buttonShowTour=0x7f08001a;
         public static final int buttonSkipTour=0x7f08001b;
-        public static final int conf_payment=0x7f080027;
-        public static final int e_session=0x7f08002a;
+        public static final int conf_payment=0x7f080028;
+        public static final int e_session=0x7f08002b;
         public static final int editTextLabel=0x7f08000a;
+        public static final int export_session=0x7f08002f;
         public static final int imageView1=0x7f080018;
         public static final int imageView2=0x7f080019;
+        public static final int importFile=0x7f080027;
         public static final int listLog=0x7f080009;
         public static final int listOfInvolvedParticipants=0x7f08000b;
         public static final int listOfParticipants=0x7f080006;
@@ -75,16 +95,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int listView1=0x7f080004;
         public static final int listView2=0x7f080002;
         public static final int lvAllParticipants=0x7f080015;
-        public static final int m_settlement=0x7f080028;
-        public static final int p_settlement=0x7f080029;
+        public static final int m_settlement=0x7f080029;
+        public static final int p_settlement=0x7f08002a;
         public static final int pageIndicator1=0x7f08001f;
         public static final int pageIndicator2=0x7f080020;
         public static final int pageIndicator3=0x7f080021;
         public static final int pageIndicator4=0x7f080022;
         public static final int pageIndicator5=0x7f080023;
-        public static final int s_log=0x7f08002c;
+        public static final int s_log=0x7f08002d;
         public static final int sessionMembers=0x7f080017;
         public static final int sessionName=0x7f080016;
+        public static final int share_session=0x7f08002e;
         public static final int sliding_pane_layout=0x7f080000;
         public static final int textView1=0x7f080003;
         public static final int textView2=0x7f080001;
@@ -150,10 +171,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int enter_amount=0x7f050022;
         public static final int enter_expenditure_per_person=0x7f050017;
         public static final int expense_label=0x7f050016;
+        public static final int export=0x7f050051;
+        public static final int export_as=0x7f050052;
+        public static final int export_desc=0x7f050053;
         public static final int first_time=0x7f050031;
         public static final int from_contacts=0x7f050013;
         public static final int from_text=0x7f050012;
         public static final int gotit=0x7f05003e;
+        public static final int import_file=0x7f050054;
         public static final int inactive=0x7f05004f;
         public static final int keep_closed=0x7f05004d;
         public static final int label=0x7f050026;
@@ -164,6 +189,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int new_session=0x7f050004;
         public static final int new_session_title=0x7f050006;
         public static final int no_label_selected=0x7f05002d;
+        public static final int no_name=0x7f050050;
         public static final int no_thanks=0x7f050033;
         public static final int none_selected=0x7f05002c;
         public static final int ok=0x7f05001e;
@@ -187,6 +213,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int session_name=0x7f050008;
         public static final int settlement_proposal=0x7f050024;
         public static final int settlement_statement=0x7f050023;
+        public static final int share=0x7f050055;
         public static final int show_log=0x7f050047;
         public static final int suggestion=0x7f050025;
         public static final int switch_theme=0x7f050041;
@@ -219,16 +246,22 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
          */
-        public static final int AppTheme=0x7f060005;
+        public static final int AppTheme=0x7f06000b;
         /**  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppThemeLight=0x7f060006;
-        public static final int ButtonBar=0x7f060008;
-        public static final int ButtonBarButton=0x7f060009;
-        public static final int ButtonBarButtonLight=0x7f06000a;
+        public static final int AppThemeLight=0x7f06000c;
+        public static final int ButtonBar=0x7f06000e;
+        public static final int ButtonBarButton=0x7f06000f;
+        public static final int ButtonBarButtonLight=0x7f060010;
         /**  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int SplashTheme=0x7f060007;
+        public static final int SplashTheme=0x7f06000d;
+        public static final int actionBarIconExportDark=0x7f060005;
+        public static final int actionBarIconExportLight=0x7f060006;
+        public static final int actionBarIconImportDark=0x7f060007;
+        public static final int actionBarIconImportLight=0x7f060008;
+        public static final int actionBarIconShareDark=0x7f060009;
+        public static final int actionBarIconShareLight=0x7f06000a;
         public static final int backdropBlackGrey=0x7f060003;
         public static final int backdropWhiteGrey=0x7f060004;
         public static final int text_black=0x7f060002;
