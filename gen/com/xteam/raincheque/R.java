@@ -102,16 +102,17 @@ public final class R {
         public static final int app_name=0x7f050000;
         public static final int balance=0x7f05001f;
         public static final int cancel=0x7f05000c;
-        public static final int chapter1text=0x7f050038;
-        public static final int chapter1title=0x7f050033;
-        public static final int chapter2text=0x7f050039;
-        public static final int chapter2title=0x7f050034;
-        public static final int chapter3text=0x7f05003a;
-        public static final int chapter3title=0x7f050035;
-        public static final int chapter4text=0x7f05003b;
-        public static final int chapter4title=0x7f050036;
-        public static final int chapter5text=0x7f05003c;
-        public static final int chapter5title=0x7f050037;
+        public static final int change=0x7f05003f;
+        public static final int chapter1text=0x7f050039;
+        public static final int chapter1title=0x7f050034;
+        public static final int chapter2text=0x7f05003a;
+        public static final int chapter2title=0x7f050035;
+        public static final int chapter3text=0x7f05003b;
+        public static final int chapter3title=0x7f050036;
+        public static final int chapter4text=0x7f05003c;
+        public static final int chapter4title=0x7f050037;
+        public static final int chapter5text=0x7f05003d;
+        public static final int chapter5title=0x7f050038;
         public static final int choose_participant_action=0x7f05000a;
         public static final int choose_session_action=0x7f050009;
         public static final int closed_sessions=0x7f050003;
@@ -123,10 +124,10 @@ public final class R {
         public static final int enter_amount=0x7f050022;
         public static final int enter_expenditure_per_person=0x7f050017;
         public static final int expense_label=0x7f050016;
-        public static final int first_time=0x7f050030;
+        public static final int first_time=0x7f050031;
         public static final int from_contacts=0x7f050013;
         public static final int from_text=0x7f050012;
-        public static final int gotit=0x7f05003d;
+        public static final int gotit=0x7f05003e;
         public static final int label=0x7f050026;
         public static final int label_example=0x7f050027;
         public static final int list_of_participants=0x7f05000d;
@@ -134,13 +135,14 @@ public final class R {
         public static final int name_participant=0x7f050011;
         public static final int new_session=0x7f050004;
         public static final int new_session_title=0x7f050006;
-        public static final int no_thanks=0x7f050032;
+        public static final int no_label_selected=0x7f05002d;
+        public static final int no_thanks=0x7f050033;
         public static final int none_selected=0x7f05002c;
         public static final int ok=0x7f05001e;
         public static final int oops=0x7f05002a;
-        public static final int paid=0x7f05002d;
+        public static final int paid=0x7f05002e;
         public static final int participant_name=0x7f05000f;
-        public static final int payment_statement=0x7f05002e;
+        public static final int payment_statement=0x7f05002f;
         public static final int propose_settlements=0x7f05001a;
         public static final int select_multiple_participants=0x7f050014;
         public static final int select_payee=0x7f050021;
@@ -154,8 +156,8 @@ public final class R {
         public static final int settlement_proposal=0x7f050024;
         public static final int settlement_statement=0x7f050023;
         public static final int suggestion=0x7f050025;
-        public static final int tagline=0x7f05002f;
-        public static final int yes_sure=0x7f050031;
+        public static final int tagline=0x7f050030;
+        public static final int yes_sure=0x7f050032;
     }
     public static final class style {
         /** 

@@ -64,6 +64,8 @@ public class ControlBoardActivity extends Activity
 	        	{ 
 	        	    public void onClick(DialogInterface dialog, int which) 
 	        	    {
+	        	    	if(input.getText().toString().trim().contentEquals(""))
+	        	    		return;        	    	
 	        	    	SessionRecord s = new SessionRecord();
 	        	    	s.label = input.getText().toString();
 	        	    	if(RainChequeApplication.sessionList.size()>0)	        	    	

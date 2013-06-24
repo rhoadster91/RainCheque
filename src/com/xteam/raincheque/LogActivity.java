@@ -88,10 +88,11 @@ public class LogActivity extends Activity
     	        	    {
     	        	    	AccountRecord a = new AccountRecord();
     	        	    	a.name = input.getText().toString();
+    	        	    	RainChequeApplication.currentSession.accountList.add(a);
     	        	    	for(SessionRecord s:RainChequeApplication.sessionList)
     	        			{
-    	        				if(s.sessionID==RainChequeApplication.currentSession.sessionID)
-    	        					s.accountList.add(a);
+    	        				if(s.sessionID==RainChequeApplication.currentSession.sessionID)    	        				
+    	        					s.accountList = RainChequeApplication.currentSession.accountList;    	        				
     	        			}
     	        	    	RainChequeApplication.writeAccountsToFile(getApplicationContext());    	        	    	
     	        	    }
@@ -149,6 +150,8 @@ public class LogActivity extends Activity
 				        	{ 
 				        	    public void onClick(DialogInterface dialog, int which) 
 				        	    {
+				        	    	if(input.getText().toString().trim().contentEquals(""))
+				        	    		return;			        	    	
 				        	    	String payer = RainChequeApplication.currentSession.accountList.get(payerID).name;
 				        	    	String payee = RainChequeApplication.currentSession.accountList.get(payeeID).name;
 				        	    	String amount = input.getText().toString();

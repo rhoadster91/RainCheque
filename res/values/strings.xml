@@ -46,6 +46,7 @@
 	<string name="oops">Oops</string>
 	<string name="all_selected">All participants have already been selected</string>
 	<string name="none_selected">No participant has been selected</string>
+	<string name="no_label_selected">Looks like you have not entered any label. Labels are necessary to distinguish different payments in the session log. Would you like to add a label now?</string>
 	<string name="paid">Paid:</string>
 	<string name="payment_statement">%1$s has paid %2$s on account of %3$s for %4$s</string>
 	<string name="tagline">One more way to save paper</string>
@@ -63,5 +64,5 @@
 	<string name="chapter4text">When any person gives some money to someone else, you can keep that record in this app by making a settlement between two participants.</string>
 	<string name="chapter5text">Finally, when it\'s time to end the session (or when you feel like settlements are due) let the app do it\'s magic. The app will tell you exactly who owes how much and to whom.</string>
 	<string name="gotit">Got it!</string>
-	
+	<string name="change">Change</string>
 </resources>

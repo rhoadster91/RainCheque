@@ -14,6 +14,7 @@ import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -32,6 +33,7 @@ public class PaymentActivity extends Activity
 	ArrayList<PerIdPayment> payments;
 	ArrayList<PerIdPayment> debts;
 	int subtotal = 0, participantCount = 0;
+	boolean isLabelOK = false;
 	
 	private class PerIdPayment
 	{
@@ -74,6 +76,19 @@ public class PaymentActivity extends Activity
 	        	{
 	        		names[i] = a.name;
 	        		checks[i] = false;
+	        		if(debts==null)
+	        		{
+	        			i++;
+	        			continue;	        			
+	        		}
+	        		for(PerIdPayment pid: debts)
+	        		{
+	        			if(pid.id==i)
+	        			{
+	        				checks[i] = true;
+	        				break;
+	        			}
+	        		}	        		
 	        		i++;
 	        	}
 	        	builder.setMultiChoiceItems(names, checks, new DialogInterface.OnMultiChoiceClickListener()
@@ -105,7 +120,7 @@ public class PaymentActivity extends Activity
 	        	    			participants.add(RainChequeApplication.currentSession.accountList.get(i).name);
 	        	    		}	        	    		
 	        	    	}
-	        	    	String selected = new String();
+	        	    	String selected = new String();	        	    		        	    	
 	        	    	for(int i = 0;i<participants.size();i++)
 	        	    	{
 	        	    		selected = selected.concat(participants.get(i));
@@ -122,6 +137,8 @@ public class PaymentActivity extends Activity
 	        	    			selected = selected.concat(", ");
 	        	    		}	        	    			
 	        	    	}
+	        	    	if(selected.contentEquals(""))
+	        	    		selected = new String(getString(R.string.selected_participants));
 	        	    	tvList.setText(selected);
 	        	    }
 	        	});
@@ -144,57 +161,37 @@ public class PaymentActivity extends Activity
 			@Override
 			public void onClick(View v) 
 			{
-				if(tvList.getText().toString().contentEquals(getString(R.string.selected_participants)) || ids.size() == RainChequeApplication.currentSession.accountList.size())
+				if(etLabel.getText().toString().trim().contentEquals(""))
 				{
 					AlertDialog.Builder builder = new AlertDialog.Builder(PaymentActivity.this);
 		        	builder.setTitle(getString(R.string.oops));
 		        	TextView tv = new TextView(PaymentActivity.this);
-		        	tv.setText(R.string.none_selected);
+		        	tv.setText(R.string.no_label_selected);
 		        	tv.setTextAppearance(PaymentActivity.this, android.R.style.TextAppearance_Large);
     	        	tv.setPadding(30, 30, 30, 30);
 		        	builder.setView(tv);
-		        	builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() 
+		        	builder.setPositiveButton(getString(R.string.yes_sure), new DialogInterface.OnClickListener() 
+		        	{
+		        	    public void onClick(DialogInterface dialog, int which) 
+		        	    {
+		        	    	etLabel.requestFocus();
+		        	    	InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		        	    	imm.showSoftInput(etLabel, InputMethodManager.SHOW_IMPLICIT);
+		        	        return;
+		        	    }
+		        	});
+		        	builder.setNegativeButton(getString(R.string.no_thanks), new DialogInterface.OnClickListener() 
 		        	{
 		        	    public void onClick(DialogInterface dialog, int which) 
 		        	    {
 		        	        dialog.cancel();
+		        	        doneConfirmation();
 		        	    }
 		        	});
 		        	builder.show();
-		        	return;
 				}
 				else
-				{
-					for(PerIdPayment pid: debts)
-					{
-						RainChequeApplication.currentSession.accountList.get(pid.id).worth += subtotal / participantCount;
-					}
-					for(PerIdPayment pip: payments)					
-					{
-						RainChequeApplication.currentSession.accountList.get(pip.id).paid += pip.payment;
-						String payer = RainChequeApplication.currentSession.accountList.get(pip.id).name;
-						String logText = String.format(getString(R.string.payment_statement), payer, pip.payment, etLabel.getText().toString(), tvList.getText().toString());
-	        	    	LogEntry logEntry = new LogEntry();
-	        	    	logEntry.entry = logText;
-	        	    	Time now = new Time();
-	        	    	now.setToNow();
-	        	    	String date = DateFormat.format("d MMMM yyyy", Calendar.getInstance()).toString();
-	        	    	logEntry.time = now.format(date + " at %I:%M:%S");				        	    	
-	        	    	RainChequeApplication.currentSession.sessionLog.add(logEntry); 	        	    	
-					}
-					for(SessionRecord s:RainChequeApplication.sessionList)
-        			{
-        				if(s.sessionID==RainChequeApplication.currentSession.sessionID)
-        				{
-        					s.sessionLog = RainChequeApplication.currentSession.sessionLog;
-        					s.accountList = RainChequeApplication.currentSession.accountList;
-        					break;
-        				}
-        			}
-					RainChequeApplication.writeAccountsToFile(getApplicationContext());
-					onBackPressed();
-					
-				}
+					doneConfirmation();				
 			}
 			
 		});
@@ -232,9 +229,7 @@ public class PaymentActivity extends Activity
 					{
 						final AccountRecord a = tempAccountList.get(which);
 						final PerIdPayment payment = new PerIdPayment();
-						payment.id = ids.get(which);
-						tempAccountList.remove(which);
-						ids.remove(which);
+						final int whichPayer = which;
 						AlertDialog.Builder builder = new AlertDialog.Builder(PaymentActivity.this);
 			        	builder.setTitle(getString(R.string.enter_amount));
 			        	final EditText input = new EditText(PaymentActivity.this);	        	
@@ -245,6 +240,11 @@ public class PaymentActivity extends Activity
 			        	{ 
 			        	    public void onClick(DialogInterface dialog, int which) 
 			        	    {
+			        	    	if(input.getText().toString().trim().contentEquals(""))
+			        	    		return;
+			        	    	payment.id = ids.get(whichPayer);
+								tempAccountList.remove(whichPayer);
+								ids.remove(whichPayer);								
 			        	    	LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			        	    	View v = vi.inflate(R.layout.session_row, null);
 			        	    	LinearLayout lila = (LinearLayout)findViewById(R.id.listOfPayers); 
@@ -283,6 +283,61 @@ public class PaymentActivity extends Activity
 	        	builder.show();
 			}			
 		});
+	}
+	
+	private void doneConfirmation()
+	{
+		if(tvList.getText().toString().contentEquals(getString(R.string.selected_participants)) || ids.size() == RainChequeApplication.currentSession.accountList.size())
+		{
+			AlertDialog.Builder builder = new AlertDialog.Builder(PaymentActivity.this);
+        	builder.setTitle(getString(R.string.oops));
+        	TextView tv = new TextView(PaymentActivity.this);
+        	tv.setText(R.string.none_selected);
+        	tv.setTextAppearance(PaymentActivity.this, android.R.style.TextAppearance_Large);
+        	tv.setPadding(30, 30, 30, 30);
+        	builder.setView(tv);
+        	builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() 
+        	{
+        	    public void onClick(DialogInterface dialog, int which) 
+        	    {
+        	        dialog.cancel();
+        	    }
+        	});
+        	builder.show();
+        	return;
+		}
+		else
+		{
+			for(PerIdPayment pid: debts)
+			{
+				RainChequeApplication.currentSession.accountList.get(pid.id).worth += subtotal / participantCount;
+			}
+			for(PerIdPayment pip: payments)					
+			{
+				RainChequeApplication.currentSession.accountList.get(pip.id).paid += pip.payment;
+				String payer = RainChequeApplication.currentSession.accountList.get(pip.id).name;
+				String logText = String.format(getString(R.string.payment_statement), payer, pip.payment, etLabel.getText().toString(), tvList.getText().toString());
+    	    	LogEntry logEntry = new LogEntry();
+    	    	logEntry.entry = logText;
+    	    	Time now = new Time();
+    	    	now.setToNow();
+    	    	String date = DateFormat.format("d MMMM yyyy", Calendar.getInstance()).toString();
+    	    	logEntry.time = now.format(date + " at %I:%M:%S");				        	    	
+    	    	RainChequeApplication.currentSession.sessionLog.add(logEntry); 	        	    	
+			}
+			for(SessionRecord s:RainChequeApplication.sessionList)
+			{
+				if(s.sessionID==RainChequeApplication.currentSession.sessionID)
+				{
+					s.sessionLog = RainChequeApplication.currentSession.sessionLog;
+					s.accountList = RainChequeApplication.currentSession.accountList;
+					break;
+				}
+			}
+			RainChequeApplication.writeAccountsToFile(getApplicationContext());
+			onBackPressed();
+			
+		}
 	}
 
 }
