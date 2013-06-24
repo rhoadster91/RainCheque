@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/conf_payment" android:title="@string/confirm_payment"></item>
-    <item android:id="@+id/m_settlement" android:title="@string/make_settlement"></item>
-    <item android:id="@+id/p_settlement" android:title="@string/propose_settlements"></item>
+    <item android:id="@+id/conf_payment" android:title="@string/confirm_payment" android:visible="false"></item>
+    <item android:id="@+id/m_settlement" android:title="@string/make_settlement" android:visible="false"></item>
+    <item android:id="@+id/p_settlement" android:title="@string/propose_settlements" android:visible="false"></item>
     
-    <item android:id="@+id/e_session" android:title="@string/edit_session"></item><item android:id="@+id/a_participant" android:title="@string/add_participant"></item>
-    <item android:id="@+id/x_session" android:title="@string/end_session"></item>
+    <item android:id="@+id/e_session" android:title="@string/edit_session" android:visible="false"></item>
+    <item android:id="@+id/a_participant" android:title="@string/add_participant" android:visible="false"></item>
+    <item android:id="@+id/s_log" android:title="@string/show_log" android:visible="false"></item>
     
 
 </menu>

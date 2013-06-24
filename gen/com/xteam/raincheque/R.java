@@ -49,62 +49,68 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int somecontribute=0x7f020009;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f080019;
-        public static final int a_participant=0x7f080026;
-        public static final int action_help=0x7f080021;
-        public static final int action_switch_theme=0x7f080020;
+        public static final int LinearLayout1=0x7f08001e;
+        public static final int a_participant=0x7f08002b;
+        public static final int action_help=0x7f080026;
+        public static final int action_switch_theme=0x7f080025;
         public static final int bDonePayments=0x7f080010;
         public static final int button1=0x7f080005;
         public static final int buttonAddInvolvedParticipants=0x7f08000c;
         public static final int buttonAddParticipant=0x7f080007;
         public static final int buttonAddPayingParticipants=0x7f08000e;
         public static final int buttonDoneAddingParticipants=0x7f080008;
-        public static final int buttonGotIt=0x7f08001f;
-        public static final int buttonShowTour=0x7f080015;
-        public static final int buttonSkipTour=0x7f080016;
-        public static final int conf_payment=0x7f080022;
-        public static final int e_session=0x7f080025;
+        public static final int buttonGotIt=0x7f080024;
+        public static final int buttonShowTour=0x7f08001a;
+        public static final int buttonSkipTour=0x7f08001b;
+        public static final int conf_payment=0x7f080027;
+        public static final int e_session=0x7f08002a;
         public static final int editTextLabel=0x7f08000a;
-        public static final int imageView1=0x7f080013;
-        public static final int imageView2=0x7f080014;
+        public static final int imageView1=0x7f080018;
+        public static final int imageView2=0x7f080019;
         public static final int listLog=0x7f080009;
         public static final int listOfInvolvedParticipants=0x7f08000b;
         public static final int listOfParticipants=0x7f080006;
         public static final int listOfPayers=0x7f08000f;
-        public static final int listSuggestions=0x7f080017;
+        public static final int listSuggestions=0x7f08001c;
         public static final int listView1=0x7f080004;
         public static final int listView2=0x7f080002;
-        public static final int m_settlement=0x7f080023;
-        public static final int p_settlement=0x7f080024;
-        public static final int pageIndicator1=0x7f08001a;
-        public static final int pageIndicator2=0x7f08001b;
-        public static final int pageIndicator3=0x7f08001c;
-        public static final int pageIndicator4=0x7f08001d;
-        public static final int pageIndicator5=0x7f08001e;
-        public static final int sessionMembers=0x7f080012;
-        public static final int sessionName=0x7f080011;
+        public static final int lvAllParticipants=0x7f080015;
+        public static final int m_settlement=0x7f080028;
+        public static final int p_settlement=0x7f080029;
+        public static final int pageIndicator1=0x7f08001f;
+        public static final int pageIndicator2=0x7f080020;
+        public static final int pageIndicator3=0x7f080021;
+        public static final int pageIndicator4=0x7f080022;
+        public static final int pageIndicator5=0x7f080023;
+        public static final int s_log=0x7f08002c;
+        public static final int sessionMembers=0x7f080017;
+        public static final int sessionName=0x7f080016;
         public static final int sliding_pane_layout=0x7f080000;
         public static final int textView1=0x7f080003;
         public static final int textView2=0x7f080001;
+        public static final int textView3=0x7f080014;
         public static final int textView4=0x7f08000d;
-        public static final int viewPager=0x7f080018;
-        public static final int x_session=0x7f080027;
+        public static final int toggleButton1=0x7f080012;
+        public static final int tvSessionName=0x7f080011;
+        public static final int tvSessionTotal=0x7f080013;
+        public static final int viewPager=0x7f08001d;
     }
     public static final class layout {
         public static final int control_board=0x7f030000;
         public static final int list_participants=0x7f030001;
         public static final int log_activity=0x7f030002;
         public static final int payment_activity=0x7f030003;
-        public static final int session_row=0x7f030004;
-        public static final int splash=0x7f030005;
-        public static final int suggestions_activity=0x7f030006;
-        public static final int tour=0x7f030007;
-        public static final int tourfooter=0x7f030008;
-        public static final int tourpage1=0x7f030009;
-        public static final int tourpage2=0x7f03000a;
-        public static final int tourpage3=0x7f03000b;
-        public static final int tourpage4=0x7f03000c;
-        public static final int tourpage5=0x7f03000d;
+        public static final int session_activity=0x7f030004;
+        public static final int session_row=0x7f030005;
+        public static final int splash=0x7f030006;
+        public static final int suggestions_activity=0x7f030007;
+        public static final int tour=0x7f030008;
+        public static final int tourfooter=0x7f030009;
+        public static final int tourpage1=0x7f03000a;
+        public static final int tourpage2=0x7f03000b;
+        public static final int tourpage3=0x7f03000c;
+        public static final int tourpage4=0x7f03000d;
+        public static final int tourpage5=0x7f03000e;
     }
     public static final class menu {
         public static final int control_board=0x7f070000;
@@ -112,6 +118,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class string {
         public static final int action_help=0x7f050001;
+        public static final int active=0x7f05004e;
         public static final int active_sessions=0x7f050002;
         public static final int add=0x7f050029;
         public static final int add_participant=0x7f05000e;
@@ -119,6 +126,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int app_name=0x7f050000;
         public static final int balance=0x7f05001f;
         public static final int cancel=0x7f05000c;
+        public static final int cant_remove_participant=0x7f050049;
         public static final int change=0x7f05003f;
         public static final int chapter1text=0x7f050039;
         public static final int chapter1title=0x7f050034;
@@ -146,6 +154,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int from_contacts=0x7f050013;
         public static final int from_text=0x7f050012;
         public static final int gotit=0x7f05003e;
+        public static final int inactive=0x7f05004f;
+        public static final int keep_closed=0x7f05004d;
         public static final int label=0x7f050026;
         public static final int label_example=0x7f050027;
         public static final int list_of_participants=0x7f05000d;
@@ -160,8 +170,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int oops=0x7f05002a;
         public static final int paid=0x7f05002e;
         public static final int participant_name=0x7f05000f;
+        public static final int participants=0x7f050046;
         public static final int payment_statement=0x7f05002f;
         public static final int propose_settlements=0x7f05001a;
+        public static final int remove_participant=0x7f050048;
         public static final int select_multiple_participants=0x7f050014;
         public static final int select_payee=0x7f050021;
         public static final int select_payer=0x7f050020;
@@ -170,13 +182,19 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int select_receiving_particitpant=0x7f05001d;
         public static final int select_theme=0x7f050040;
         public static final int selected_participants=0x7f050028;
+        public static final int session=0x7f050044;
         public static final int session_log=0x7f050007;
         public static final int session_name=0x7f050008;
         public static final int settlement_proposal=0x7f050024;
         public static final int settlement_statement=0x7f050023;
+        public static final int show_log=0x7f050047;
         public static final int suggestion=0x7f050025;
         public static final int switch_theme=0x7f050041;
         public static final int tagline=0x7f050030;
+        public static final int too_few_participants=0x7f05004a;
+        public static final int too_few_participants_description=0x7f05004b;
+        public static final int too_few_participants_description_2=0x7f05004c;
+        public static final int total=0x7f050045;
         public static final int white=0x7f050042;
         public static final int yes_sure=0x7f050032;
     }

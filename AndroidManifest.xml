@@ -30,6 +30,7 @@
         <activity android:name="com.xteam.raincheque.SuggestionActivity" />
         <activity android:name="com.xteam.raincheque.PaymentActivity" />
         <activity android:name="com.xteam.raincheque.ControlBoardActivity" />
+        <activity android:name="com.xteam.raincheque.SessionActivity" />
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import java.util.Calendar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.format.DateFormat;
@@ -333,8 +334,9 @@ public class PaymentActivity extends ThemedActivity
 				}
 			}
 			RainChequeApplication.writeAccountsToFile(getApplicationContext());
-			onBackPressed();
-			
+			Intent showLog = new Intent(PaymentActivity.this, LogActivity.class);
+			startActivity(showLog);
+			finish();
 		}
 	}
 

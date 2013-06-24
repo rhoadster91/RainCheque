@@ -30,7 +30,7 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="rowColour">@style/text_white</item>
         <item name="rowColourInverse">@style/text_black</item> 
-        <item name="backdrop">@style/backdropWhiteGrey</item> 
+        <item name="backdrop">@style/backdropBlackGrey</item> 
         <item name="buttonBar">@style/ButtonBarButtonLight</item>
         
     </style>
@@ -38,7 +38,7 @@
     <style name="AppThemeLight" parent="android:Theme.Holo.Light">
         <item name="rowColour">@style/text_black</item>
         <item name="rowColourInverse">@style/text_white</item>
-        <item name="backdrop">@style/backdropBlackGrey</item>
+        <item name="backdrop">@style/backdropWhiteGrey</item>
         <item name="buttonBar">@style/ButtonBarButton</item>
         
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->

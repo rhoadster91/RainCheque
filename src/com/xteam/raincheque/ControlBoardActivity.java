@@ -115,8 +115,8 @@ public class ControlBoardActivity extends ThemedActivity
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
 			{				
 				RainChequeApplication.currentSession = (SessionRecord)activeSessionList.getItemAtPosition(arg2);
-				Intent showLog = new Intent(ControlBoardActivity.this, LogActivity.class);
-				startActivity(showLog);
+				Intent toMainActivity = new Intent(ControlBoardActivity.this, SessionActivity.class);
+				startActivity(toMainActivity);
 			}
 
 			
@@ -152,7 +152,7 @@ public class ControlBoardActivity extends ThemedActivity
 	        	    	{
 	        	    		if(sr.sessionID == s.sessionID)
 	        	    		{
-	        	    			RainChequeApplication.sessionList.remove(sr);
+	        	    			RainChequeApplication.sessionList.remove(sr);	        	    			
 	        	    			break;
 	        	    		}
 	        	    	}
@@ -177,14 +177,14 @@ public class ControlBoardActivity extends ThemedActivity
 		
 		inactiveSessionListAdapter = new SessionListAdapter(this, inactiveSessions.toArray());
 		inactiveSessionList.setAdapter(inactiveSessionListAdapter);	
-		inactiveSessionList.setClickable(true);
+		inactiveSessionList.setClickable(true);		
 		inactiveSessionList.setOnItemClickListener(new OnItemClickListener()
 		{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) 
 			{				
 				RainChequeApplication.currentSession = (SessionRecord)inactiveSessionList.getItemAtPosition(arg2);
-				Intent showLog = new Intent(ControlBoardActivity.this, LogActivity.class);
-				startActivity(showLog);
+				Intent toMainActivity = new Intent(ControlBoardActivity.this, SessionActivity.class);
+				startActivity(toMainActivity);
 			}
 
 			
@@ -272,6 +272,7 @@ public class ControlBoardActivity extends ThemedActivity
 					SharedPreferences.Editor prefEditor = sharedPref.edit();    	    	
 					prefEditor.putBoolean("black theme", isBlackSelected);
 					prefEditor.commit();
+					dialog.dismiss();
 					finish();
 					Intent toMainActivity = new Intent(ControlBoardActivity.this, ControlBoardActivity.class);
 					startActivity(toMainActivity);					

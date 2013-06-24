@@ -69,4 +69,16 @@
 	<string name="switch_theme">Switch theme</string>
 	<string name="white">White theme</string>
 	<string name="dark">Dark theme</string>
+	<string name="session">Session</string>
+	<string name="total">Total expenditure</string>
+	<string name="participants">Participants</string>
+	<string name="show_log">Show log</string>
+	<string name="remove_participant">Remove participant</string>
+	<string name="cant_remove_participant">You can only remove a participant if all his/her dues are settled i.e. if his/her balance is zero.</string>
+	<string name="too_few_participants">Too few participants</string>
+	<string name="too_few_participants_description">Since there are not enough participants remaining in this session, it will be closed, unless you add a new participant right now. What would you like to do?</string>
+	<string name="too_few_participants_description_2">Since there are not enough participants remaining in this session, you cannot activate it, unless you add a new participant right now. What would you like to do?</string>
+	<string name="keep_closed">Keep session closed</string>
+	<string name="active">ACTIVE</string>
+	<string name="inactive">CLOSED</string>
 </resources>
