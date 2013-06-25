@@ -56,7 +56,7 @@ public class SessionActivity extends ThemedActivity
 		menu.findItem(R.id.e_session).setVisible(false);
 		menu.findItem(R.id.conf_payment).setVisible(false);
 		menu.findItem(R.id.p_settlement).setVisible(true);
-		menu.findItem(R.id.s_log).setVisible(true);
+		menu.findItem(R.id.s_log).setVisible(true);				
 		if(RainChequeApplication.currentSession.isActive)
 		{
 			menu.findItem(R.id.m_settlement).setVisible(true);			
@@ -383,6 +383,11 @@ public class SessionActivity extends ThemedActivity
 	       
 			
 	        break;
+	        
+		case R.id.s_activity:
+			Intent showActivity = new Intent(this, ActivityActivity.class);
+			startActivity(showActivity);
+			break;
 		
 		}
 		return super.onMenuItemSelected(featureId, item);

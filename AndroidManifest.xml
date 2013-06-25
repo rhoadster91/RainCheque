@@ -41,6 +41,7 @@
         <data android:pathPattern=".*\\.rcs" />
     </intent-filter>
             </activity>
+            <activity android:name="com.xteam.raincheque.ActivityActivity" />
         <activity android:name="com.xteam.raincheque.SessionActivity" />
     </application>
 

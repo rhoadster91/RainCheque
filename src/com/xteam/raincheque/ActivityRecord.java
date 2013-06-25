@@ -1,9 +1,12 @@
 package com.xteam.raincheque;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ActivityRecord 
+public class ActivityRecord implements Serializable
 {
+	private static final long serialVersionUID = -1142469630772284239L;
+	
 	int activityId = 0;
 	String label;
 	ArrayList<Integer> payers = new ArrayList<Integer>();
@@ -11,6 +14,15 @@ public class ActivityRecord
 	ArrayList<Integer> payerMoney = new ArrayList<Integer>();
 	int settleWorth = 0;
 	int changeAmount = 0, changeId = -1; 
+	
+	ActivityRecord()
+	{
+		super();
+		if(RainChequeApplication.currentSession.activityList.size()==0)
+			activityId = 1;
+		else
+			activityId = RainChequeApplication.currentSession.activityList.get(RainChequeApplication.currentSession.activityList.size() - 1).activityId + 1;
+	}
 	
 	public boolean hasPayee(int id)
 	{

@@ -5,9 +5,9 @@
     <item android:id="@+id/p_settlement" android:title="@string/propose_settlements" android:visible="false"></item>
     
     <item android:id="@+id/e_session" android:title="@string/edit_session" android:visible="false"></item>
-    <item android:id="@+id/a_participant" android:title="@string/add_participant" android:visible="false"></item>
-    <item android:id="@+id/s_log" android:title="@string/show_log" android:visible="false"></item>
+    <item android:id="@+id/a_participant" android:title="@string/add_participant" android:visible="false"></item>    
     <item android:id="@+id/share_session" android:showAsAction="always" android:title="@string/share" style="?actionBarIconShare"></item>
     <item android:id="@+id/export_session" android:showAsAction="always" android:title="@string/export" style="?actionBarIconExport"></item>
-
+	<item android:id="@+id/s_log" android:title="@string/show_log" android:visible="false"></item>
+	<item android:id="@+id/s_activity" android:title="@string/show_all_activities" android:visible="true"></item>
 </menu>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+	
     <string name="app_name">RainCheque</string>
     <string name="action_help">Help</string>
     <string name="active_sessions">Active sessions</string>
@@ -13,6 +13,7 @@
 	<string name="choose_session_action">Choose action</string>
 	<string name="choose_participant_action">Choose name info source</string>
 	<string name="delete_session">Delete session</string>
+	<string name="delete_activity">Delete activity</string>
 	<string name="cancel">Cancel</string>	
 	<string name="list_of_participants">List of participants</string>
 	<string name="add_participant">Add participant</string>
@@ -48,7 +49,8 @@
 	<string name="none_selected">No participant has been selected</string>
 	<string name="no_label_selected">Looks like you have not entered any label. Labels are necessary to distinguish different payments in the session log. Would you like to add a label now?</string>
 	<string name="paid">Paid:</string>
-	<string name="payment_statement">Activity %1$s for %2$s worth a total of %3$s was paid by %4$s. %5$s kept the change.</string>
+	<string name="payment_statement">Activity %1$s for %2$s worth a total of %3$s was paid by %4$s.</string>
+	<string name="kept_change">%1$s kept the change.</string>
 	<string name="tagline">One more way to save paper</string>
 	<string name="first_time">Looks like this is the first time you are trying the app. Would you like to take a tour?</string>
 	<string name="yes_sure">Yes, sure!</string>
@@ -92,4 +94,7 @@
 	<string name="import_file_to_raincheque">Import to RainCheque</string>
 	<string name="import_file_successful">Imported file successfully</string>
 	<string name="share">Share</string>
+	<string name="list_of_activities">List of activities</string>
+	<string name="activity">Activity %1$s deleted</string>
+	<string name="show_all_activities">Show all activities</string>
 </resources>

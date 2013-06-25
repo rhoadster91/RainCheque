@@ -367,24 +367,31 @@ public class PaymentActivity extends ThemedActivity
 				if(ar.id == thisActivity.changeId)
 					ar.settlement += thisActivity.changeAmount;
 			}
-			for(SessionRecord s:RainChequeApplication.sessionList)
-			{
-				if(s.sessionID==RainChequeApplication.currentSession.sessionID)
-				{
-					s.sessionLog = RainChequeApplication.currentSession.sessionLog;
-					s.accountList = RainChequeApplication.currentSession.accountList;
-					break;
-				}
-			}
-			RainChequeApplication.writeAccountsToFile(getApplicationContext());
-			String logText = String.format(getString(R.string.payment_statement), etLabel.getText().toString(),  tvList.getText().toString(), new String("" + total), tvPayers.getText().toString(), change);	    	
+			
+			String logText = String.format(getString(R.string.payment_statement), etLabel.getText().toString(),  tvList.getText().toString(), new String("" + total), tvPayers.getText().toString());	    	
+			if(change!=null)			
+				logText = logText.concat(" " + String.format(getString(R.string.kept_change), change));			
 			LogEntry logEntry = new LogEntry();
 	    	logEntry.entry = logText;
 	    	Time now = new Time();
 	    	now.setToNow();
 	    	String date = DateFormat.format("d MMMM yyyy", Calendar.getInstance()).toString();
-	    	logEntry.time = now.format(date + " at %I:%M:%S");				        	    	
-	    	RainChequeApplication.currentSession.sessionLog.add(logEntry); 	
+	    	logEntry.time = now.format(date + " at %I:%M:%S");	
+	    	logEntry.activityReference = thisActivity.activityId;
+	    	RainChequeApplication.currentSession.sessionLog.add(logEntry);
+	    	thisActivity.label = etLabel.getText().toString();
+	    	RainChequeApplication.currentSession.activityList.add(thisActivity);
+	    	for(SessionRecord s:RainChequeApplication.sessionList)
+			{
+				if(s.sessionID==RainChequeApplication.currentSession.sessionID)
+				{
+					s.sessionLog = RainChequeApplication.currentSession.sessionLog;
+					s.accountList = RainChequeApplication.currentSession.accountList;
+					s.activityList = RainChequeApplication.currentSession.activityList;
+					break;
+				}
+			}
+			RainChequeApplication.writeAccountsToFile(getApplicationContext());
 			Intent showLog = new Intent(PaymentActivity.this, LogActivity.class);
 			startActivity(showLog);
 			finish();
