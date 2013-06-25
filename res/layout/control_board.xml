@@ -56,28 +56,15 @@
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView1"
         android:background="@drawable/borderui"
-        android:padding="1dp"
-         >
+        android:padding="1dp" >
 
     </ListView>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/listView1"
-        android:gravity="center_vertical|center_horizontal|center" >
-        
-        <Button
-	        android:id="@+id/button1"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/new_session" />
-	         
-    </LinearLayout>
+    
     
 </RelativeLayout>
 </android.support.v4.widget.SlidingPaneLayout>

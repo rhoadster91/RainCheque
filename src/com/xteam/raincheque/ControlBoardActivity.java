@@ -21,11 +21,9 @@ import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -46,58 +44,7 @@ public class ControlBoardActivity extends ThemedActivity
 		RainChequeApplication.readAccountsFromFile(getApplicationContext());		
 		refreshList();
 		SlidingPaneLayout slidingPane = (SlidingPaneLayout)findViewById(R.id.sliding_pane_layout);
-		slidingPane.setSliderFadeColor(Color.TRANSPARENT);
-		Button bCreateSession = (Button)findViewById(R.id.button1);
-		bCreateSession.setOnClickListener(new OnClickListener()
-		{
-
-			@Override
-			public void onClick(View v) 
-			{
-				AlertDialog.Builder builder = new AlertDialog.Builder(ControlBoardActivity.this);
-	        	builder.setTitle(getString(R.string.new_session_title));
-	        	LinearLayout lila = new LinearLayout(getApplicationContext());
-	        	lila.setOrientation(LinearLayout.VERTICAL);
-	        	TextView tv = new TextView(ControlBoardActivity.this);
-	        	tv.setText(getString(R.string.session_name));
-	        	tv.setTextAppearance(ControlBoardActivity.this, android.R.style.TextAppearance_Large);
-	        	tv.setPadding(30, 30, 30, 30);	        	
-	        	lila.addView(tv);        	
-	        	final EditText input = new EditText(ControlBoardActivity.this);	        	
-	        	input.setInputType(InputType.TYPE_CLASS_TEXT);
-	        	input.setPadding(30, 30, 30, 30);
-	        	lila.addView(input);
-	        	builder.setView(lila);
-	        	builder.setPositiveButton(getString(R.string.new_session), new DialogInterface.OnClickListener() 
-	        	{ 
-	        	    public void onClick(DialogInterface dialog, int which) 
-	        	    {
-	        	    	if(input.getText().toString().trim().contentEquals(""))
-	        	    		return;        	    	
-	        	    	SessionRecord s = new SessionRecord();
-	        	    	s.label = input.getText().toString();
-	        	    	if(RainChequeApplication.sessionList.size()>0)	        	    	
-	        	    		s.sessionID = RainChequeApplication.sessionList.get(RainChequeApplication.sessionList.size() - 1).sessionID + 1;	        	    	
-	        	    	else	        	    	
-	        	    		s.sessionID = 1;
-	        	    	s.accountList = new ArrayList<AccountRecord>();
-	        	    	RainChequeApplication.currentSession = s;
-	        	    	Intent startListOfParticipantsActivity = new Intent(ControlBoardActivity.this, ListOfParticipantsActivity.class);
-	        	    	startActivity(startListOfParticipantsActivity);
-	        	    }
-	        	});
-	        	builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() 
-	        	{
-	        	    public void onClick(DialogInterface dialog, int which) 
-	        	    {
-	        	        dialog.cancel();
-	        	    }
-	        	});
-
-	        	builder.show();
-			}
-			
-		});
+		slidingPane.setSliderFadeColor(Color.TRANSPARENT);		
 	}
 	
 	private void refreshList()
@@ -327,6 +274,49 @@ public class ControlBoardActivity extends ThemedActivity
 				}
 				
 			});
+			break;
+		case R.id.newSession:
+			builder = new AlertDialog.Builder(ControlBoardActivity.this);
+        	builder.setTitle(getString(R.string.new_session_title));
+        	LinearLayout lila = new LinearLayout(getApplicationContext());
+        	lila.setOrientation(LinearLayout.VERTICAL);
+        	TextView tv = new TextView(ControlBoardActivity.this);
+        	tv.setText(getString(R.string.session_name));
+        	tv.setTextAppearance(ControlBoardActivity.this, android.R.style.TextAppearance_Large);
+        	tv.setPadding(30, 30, 30, 30);	        	
+        	lila.addView(tv);        	
+        	final EditText input = new EditText(ControlBoardActivity.this);	        	
+        	input.setInputType(InputType.TYPE_CLASS_TEXT);
+        	input.setPadding(30, 30, 30, 30);
+        	lila.addView(input);
+        	builder.setView(lila);
+        	builder.setPositiveButton(getString(R.string.new_session), new DialogInterface.OnClickListener() 
+        	{ 
+        	    public void onClick(DialogInterface dialog, int which) 
+        	    {
+        	    	if(input.getText().toString().trim().contentEquals(""))
+        	    		return;        	    	
+        	    	SessionRecord s = new SessionRecord();
+        	    	s.label = input.getText().toString();
+        	    	if(RainChequeApplication.sessionList.size()>0)	        	    	
+        	    		s.sessionID = RainChequeApplication.sessionList.get(RainChequeApplication.sessionList.size() - 1).sessionID + 1;	        	    	
+        	    	else	        	    	
+        	    		s.sessionID = 1;
+        	    	s.accountList = new ArrayList<AccountRecord>();
+        	    	RainChequeApplication.currentSession = s;
+        	    	Intent startListOfParticipantsActivity = new Intent(ControlBoardActivity.this, ListOfParticipantsActivity.class);
+        	    	startActivity(startListOfParticipantsActivity);
+        	    }
+        	});
+        	builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() 
+        	{
+        	    public void onClick(DialogInterface dialog, int which) 
+        	    {
+        	        dialog.cancel();
+        	    }
+        	});
+
+        	builder.show();
 			break;
 		}
 		return super.onMenuItemSelected(featureId, item);

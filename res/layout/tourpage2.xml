@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#FFFFFF"
     android:contentDescription="@string/chapter1title"
     android:gravity="center_vertical"
@@ -29,6 +30,10 @@
       android:layout_height="wrap_content"
       android:padding="20dp"
       android:text="@string/chapter2text"
+      android:maxLines="6"
+      android:scrollbars="vertical"      
+      
       android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>
+

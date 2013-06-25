@@ -9,5 +9,7 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_help"/>
-    <item style="?actionBarIconImport" android:id="@+id/importFile" android:showAsAction="ifRoom|withText" android:title="@string/import_file"/>   
+    <item style="?actionBarIconAdd" android:id="@+id/newSession" android:showAsAction="always" android:title="@string/new_session_title"/>
+    <item style="?actionBarIconImport" android:id="@+id/importFile" android:showAsAction="ifRoom|withText" android:title="@string/import_file"/>
+       
 </menu>

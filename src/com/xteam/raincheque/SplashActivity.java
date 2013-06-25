@@ -128,6 +128,7 @@ public class SplashActivity extends Activity
 				if(arg0==4)
 				{
 					Button gotIt = (Button)findViewById(R.id.buttonGotIt);
+					gotIt.setVisibility(Button.VISIBLE);
 					gotIt.setOnClickListener(new OnClickListener()
 					{
 						@Override

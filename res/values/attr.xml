@@ -9,4 +9,5 @@
   <attr name="actionBarIconExport" format="reference" />
   <attr name="actionBarIconImport" format="reference" />
   <attr name="actionBarIconShare" format="reference" />
+  <attr name="actionBarIconAdd" format="reference" />
 </resources>

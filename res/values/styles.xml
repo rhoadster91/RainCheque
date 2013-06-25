@@ -51,6 +51,13 @@
    <style name="actionBarIconShareLight">
        <item name="android:icon">@drawable/share_light</item>       
    </style>
+   <style name="actionBarIconAddDark">
+       <item name="android:icon">@drawable/add_dark</item>       
+   </style>
+   
+   <style name="actionBarIconAddLight">
+       <item name="android:icon">@drawable/add_light</item>       
+   </style>
    
     <!-- Application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo">
@@ -63,7 +70,7 @@
         <item name="actionBarIconExport">@style/actionBarIconExportDark</item>        
          <item name="actionBarIconImport">@style/actionBarIconImportDark</item>
          <item name="actionBarIconShare">@style/actionBarIconShareDark</item>
-         
+         <item name="actionBarIconAdd">@style/actionBarIconAddDark</item>
     </style>
     
     <style name="AppThemeLight" parent="android:Theme.Holo.Light">
@@ -75,7 +82,7 @@
          <item name="actionBarIconExport">@style/actionBarIconExportLight</item>
          <item name="actionBarIconImport">@style/actionBarIconImportLight</item>
          <item name="actionBarIconShare">@style/actionBarIconShareLight</item>
-         
+         <item name="actionBarIconAdd">@style/actionBarIconAddLight</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>    
     <style name="SplashTheme" parent="android:Theme.Holo.Light.NoActionBar">
