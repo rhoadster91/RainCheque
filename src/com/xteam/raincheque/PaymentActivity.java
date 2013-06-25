@@ -298,7 +298,7 @@ public class PaymentActivity extends ThemedActivity
 			for(Integer i:thisActivity.payerMoney)
 				total += i.intValue();
 		}
-		if(total!=Integer.parseInt(etActualTotal.getText().toString()))
+		if(total!=Integer.parseInt(etActualTotal.getText().toString()) && !skipCheck)
 		{
 			AlertDialog.Builder builder = new AlertDialog.Builder(PaymentActivity.this);
         	builder.setTitle(getString(R.string.who_kept_the_change));
