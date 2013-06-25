@@ -11,13 +11,19 @@
     </style>
 	<style name="text_white">
     	 <item name="android:textColor">#FFFFFF</item>
-      
+      	
    </style>
-   <style name="text_black">
-       <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+   <style name="text_black">       
        <item name="android:textColor">#000000</item>
-      
+       
    </style>
+   <style name="backdropBlack">
+       <item name="android:background">#000000</item>
+   </style>
+   <style name="backdropWhite">
+       <item name="android:background">#FFFFFF</item>
+   </style>
+   
    <style name="backdropBlackGrey">
        <item name="android:background">#333333</item>
    </style>
@@ -52,20 +58,24 @@
         <item name="rowColour">@style/text_white</item>
         <item name="rowColourInverse">@style/text_black</item> 
         <item name="backdrop">@style/backdropBlackGrey</item> 
+        <item name="background">@style/backdropBlack</item>
         <item name="buttonBar">@style/ButtonBarButtonLight</item>
         <item name="actionBarIconExport">@style/actionBarIconExportDark</item>        
          <item name="actionBarIconImport">@style/actionBarIconImportDark</item>
          <item name="actionBarIconShare">@style/actionBarIconShareDark</item>
+         
     </style>
     
     <style name="AppThemeLight" parent="android:Theme.Holo.Light">
         <item name="rowColour">@style/text_black</item>
         <item name="rowColourInverse">@style/text_white</item>
         <item name="backdrop">@style/backdropWhiteGrey</item>
+        <item name="background">@style/backdropWhite</item>
         <item name="buttonBar">@style/ButtonBarButton</item>
          <item name="actionBarIconExport">@style/actionBarIconExportLight</item>
          <item name="actionBarIconImport">@style/actionBarIconImportLight</item>
          <item name="actionBarIconShare">@style/actionBarIconShareLight</item>
+         
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>    
     <style name="SplashTheme" parent="android:Theme.Holo.Light.NoActionBar">

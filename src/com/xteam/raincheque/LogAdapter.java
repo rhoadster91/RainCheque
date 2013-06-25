@@ -30,6 +30,7 @@ public class LogAdapter extends ArrayAdapter<Object>
 	    TextView balance = (TextView)rowView.findViewById(R.id.sessionMembers);
 	    s = (LogEntry)values[position];
 	    sender.setText(s.entry);	    
+	    sender.setTextAppearance(context, android.R.style.TextAppearance_Medium);
 	    balance.setText(s.time.toString());
 	    return rowView;
 	  }

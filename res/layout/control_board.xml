@@ -29,7 +29,6 @@
         android:layout_height="fill_parent"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView2"
-        
         >
 
     </ListView>
@@ -61,7 +60,8 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView1"
         android:background="@drawable/borderui"
-        android:padding="1dp" >
+        android:padding="1dp"
+         >
 
     </ListView>
 
