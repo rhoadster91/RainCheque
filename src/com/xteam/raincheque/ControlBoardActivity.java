@@ -40,11 +40,11 @@ public class ControlBoardActivity extends ThemedActivity
 	ListView inactiveSessionList = null;
 	SessionListAdapter activeSessionListAdapter = null;
 	SessionListAdapter inactiveSessionListAdapter = null;
-	@Override
-	protected void onCreate(Bundle savedInstanceState) 
+	
+	
+	private void readFromIntent()
 	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.control_board);
+		
 		Intent intent = getIntent();
 		if(intent.getAction()!=null ? intent.getAction().contentEquals(Intent.ACTION_VIEW) : false)			
 		{
@@ -75,9 +75,9 @@ public class ControlBoardActivity extends ThemedActivity
 				}
 			}
 			if(intent.getType()!=null ? intent.getType().startsWith("application") : false)
-			{
+			{			
+				Toast.makeText(getApplicationContext(), "Action " + intent.getAction(), Toast.LENGTH_LONG).show();
 				
-			}
 				final String scheme = uri.getScheme();
 				if(ContentResolver.SCHEME_CONTENT.equals(scheme)) 
 				{
@@ -104,13 +104,22 @@ public class ControlBoardActivity extends ThemedActivity
 				    }
 					catch(Exception e)
 					{
-						
+						e.printStackTrace();
 					}
+				}
 
 			}
 			
 		}
-		RainChequeApplication.readAccountsFromFile(getApplicationContext());		
+	}
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) 
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.control_board);	
+		RainChequeApplication.readAccountsFromFile(getApplicationContext());	
+		readFromIntent();		
 		refreshList();
 		SlidingPaneLayout slidingPane = (SlidingPaneLayout)findViewById(R.id.sliding_pane_layout);
 		slidingPane.setSliderFadeColor(Color.TRANSPARENT);		
@@ -118,6 +127,7 @@ public class ControlBoardActivity extends ThemedActivity
 	
 	private void refreshList()
 	{
+		this.setTitle(R.string.app_name);
 		activeSessionList = (ListView)findViewById(R.id.listView1);
 		inactiveSessionList = (ListView)findViewById(R.id.listView2);
 		
