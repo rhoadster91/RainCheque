@@ -74,6 +74,7 @@ public class ActivityActivity extends ThemedActivity
 	    					{
 	    						sr.activityList = RainChequeApplication.currentSession.activityList;
 	    						sr.sessionLog = RainChequeApplication.currentSession.sessionLog;
+	    						sr.accountList = RainChequeApplication.currentSession.accountList;
 	    					}					
 	    				}
 	    				RainChequeApplication.writeAccountsToFile(getApplicationContext());
