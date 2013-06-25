@@ -4,14 +4,17 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 import com.xteam.raincheque.FileDialog.FileSelectedListener;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,6 +31,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class ControlBoardActivity extends ThemedActivity 
@@ -41,6 +45,71 @@ public class ControlBoardActivity extends ThemedActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.control_board);
+		Intent intent = getIntent();
+		if(intent.getAction()!=null ? intent.getAction().contentEquals(Intent.ACTION_VIEW) : false)			
+		{
+			Uri uri = intent.getData();			
+			if(intent.getType()!=null ? (intent.getType().startsWith("text") || intent.getType().startsWith("file")) : true)
+			{
+				try
+				{
+					File file = new File(uri.getPath());
+					FileInputStream fIn = new FileInputStream(file);
+					byte []bytes = new byte[(int)file.length()];
+					fIn.read(bytes);
+					ByteArrayInputStream b = new ByteArrayInputStream(bytes);
+					ObjectInputStream objIn = new ObjectInputStream(b);
+					SessionRecord mySession = (SessionRecord)objIn.readObject();
+					if(RainChequeApplication.sessionList.size()>0)
+						mySession.sessionID = RainChequeApplication.sessionList.get(RainChequeApplication.sessionList.size() - 1).sessionID + 1;
+					else
+						mySession.sessionID = 1;
+					RainChequeApplication.sessionList.add(mySession);
+					RainChequeApplication.writeAccountsToFile(getApplicationContext());
+					refreshList();
+					Toast.makeText(getApplicationContext(), getString(R.string.import_file_successful), Toast.LENGTH_LONG).show();
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+			if(intent.getType()!=null ? intent.getType().startsWith("application") : false)
+			{
+				
+			}
+				final String scheme = uri.getScheme();
+				if(ContentResolver.SCHEME_CONTENT.equals(scheme)) 
+				{
+					try 
+				    {
+						ContentResolver cr = this.getContentResolver();
+						InputStream is = cr.openInputStream(uri);
+						byte []bytes = new byte[25000000];
+						if(is == null) 
+							return;						 
+						is.read(bytes);
+						ByteArrayInputStream b = new ByteArrayInputStream(bytes);
+						ObjectInputStream objIn = new ObjectInputStream(b);
+						SessionRecord mySession = (SessionRecord)objIn.readObject();
+						if(RainChequeApplication.sessionList.size()>0)
+							mySession.sessionID = RainChequeApplication.sessionList.get(RainChequeApplication.sessionList.size() - 1).sessionID + 1;
+						else
+							mySession.sessionID = 1;
+						RainChequeApplication.sessionList.add(mySession);
+						RainChequeApplication.writeAccountsToFile(getApplicationContext());
+						refreshList();
+						is.close();
+						Toast.makeText(getApplicationContext(), getString(R.string.import_file_successful), Toast.LENGTH_LONG).show();
+				    }
+					catch(Exception e)
+					{
+						
+					}
+
+			}
+			
+		}
 		RainChequeApplication.readAccountsFromFile(getApplicationContext());		
 		refreshList();
 		SlidingPaneLayout slidingPane = (SlidingPaneLayout)findViewById(R.id.sliding_pane_layout);

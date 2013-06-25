@@ -31,7 +31,15 @@
         <activity android:name="com.xteam.raincheque.LogActivity" />
         <activity android:name="com.xteam.raincheque.SuggestionActivity" />
         <activity android:name="com.xteam.raincheque.PaymentActivity" />
-        <activity android:name="com.xteam.raincheque.ControlBoardActivity" />
+        <activity android:name="com.xteam.raincheque.ControlBoardActivity" >
+            <intent-filter>
+        <action android:name="android.intent.action.VIEW" />      
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:mimeType="*/*" />
+        <data android:pathPattern=".*\\.rcs" />
+    </intent-filter>
+            </activity>
         <activity android:name="com.xteam.raincheque.SessionActivity" />
     </application>
 

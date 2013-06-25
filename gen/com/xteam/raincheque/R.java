@@ -194,6 +194,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int from_text=0x7f050012;
         public static final int gotit=0x7f05003e;
         public static final int import_file=0x7f050054;
+        public static final int import_file_successful=0x7f050055;
         public static final int inactive=0x7f05004f;
         public static final int keep_closed=0x7f05004d;
         public static final int label=0x7f050026;
@@ -228,7 +229,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int session_name=0x7f050008;
         public static final int settlement_proposal=0x7f050024;
         public static final int settlement_statement=0x7f050023;
-        public static final int share=0x7f050055;
+        public static final int share=0x7f050056;
         public static final int show_log=0x7f050047;
         public static final int suggestion=0x7f050025;
         public static final int switch_theme=0x7f050041;

@@ -86,5 +86,6 @@
 	<string name="export_as">Export as&#8230;</string>
 	<string name="export_desc">File exported successfully</string>
 	<string name="import_file">Import</string>
+	<string name="import_file_successful">Imported file successfully</string>
 	<string name="share">Share</string>
 </resources>
