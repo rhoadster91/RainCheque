@@ -1,101 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="@string/label"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/editTextLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/label_example"
-        android:padding="10dp" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="@string/select_multiple_participants"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp" >
+        android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/listOfInvolvedParticipants"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/selected_participants"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <Button
-            android:id="@+id/buttonAddInvolvedParticipants"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/change" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" >
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.42"
-            android:text="@string/select_paying_participants"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <Button
-            android:id="@+id/buttonAddPayingParticipants"
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@string/add" />
+            android:text="@string/label"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/editTextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/label_example"
+            android:padding="10dp" >
+        </EditText>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/select_multiple_participants"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/listOfInvolvedParticipants"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/selected_participants"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/buttonAddInvolvedParticipants"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/change" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.42"
+                android:text="@string/select_paying_participants"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/listOfPayers"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <TextView
+                android:id="@+id/payerList"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="@string/selected_participants"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/buttonAddPayingParticipants"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/change" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/listOfPayers"
-	    android:layout_width="match_parent"
-	    android:layout_height="fill_parent"
-	    android:padding="10dp"
-	    android:orientation="vertical"
-	     >
-	</LinearLayout>
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="fill_parent"
-	    android:padding="10dp" >
-
-    <Button
-        android:id="@+id/bDonePayments"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:text="@string/done" />
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"            
+            android:text="@string/total"
+            android:padding="10dp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/actualTotal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:padding="10dp"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/ButtonBar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        >
+
+        <Button
+            android:id="@+id/bDonePayments"
+            style="?buttonBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/done" />
     </LinearLayout>
 
 </LinearLayout>
-</ScrollView>

@@ -89,7 +89,25 @@ public class RainChequeApplication extends Application
             }
         }
         if(object!=null)
+        {
         	sessionList = (ArrayList<SessionRecord>) object;
+        	boolean upgradeNeeded = false;
+        	for(SessionRecord sr:sessionList)
+        	{
+        		
+        		int i = 1;
+        		for(AccountRecord ar:sr.accountList)
+        		{        			
+        			if(ar.id==0)
+        			{
+        				ar.id = i++;
+        				upgradeNeeded = true;
+        			}
+        		}
+        	}
+        	if(upgradeNeeded)
+        		writeAccountsToFile(context);        	
+        }
         else
         	sessionList = new ArrayList<SessionRecord>();
         

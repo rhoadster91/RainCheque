@@ -12,4 +12,5 @@ public class SessionRecord implements Serializable
 	boolean isActive = true;
 	ArrayList<AccountRecord> accountList;
 	ArrayList<LogEntry> sessionLog = new ArrayList<LogEntry>();
+	ArrayList<ActivityRecord> activityList = new ArrayList<ActivityRecord>();
 }

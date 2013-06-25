@@ -11,13 +11,11 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.format.DateFormat;
 import android.text.format.Time;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,76 +25,51 @@ public class PaymentActivity extends ThemedActivity
 	Button bAddPayers;
 	Button bDone;	
 	TextView tvList;
+	TextView tvPayers;
 	EditText etLabel;
+	EditText etActualTotal;
 	ArrayList<AccountRecord> tempAccountList;
 	ArrayList<Integer> ids;
-	ArrayList<PerIdPayment> payments;
-	ArrayList<PerIdPayment> debts;
 	int subtotal = 0, participantCount = 0;
-	
-	private class PerIdPayment
-	{
-		int id;
-		int payment;
-	}
-	
+	ActivityRecord thisActivity = new ActivityRecord();
+	int total = 0;
+	String change;
+	boolean skipCheck = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.payment_activity);
-		tempAccountList = new ArrayList<AccountRecord>();
-		payments = new ArrayList<PerIdPayment>();		
-		ids = new ArrayList<Integer>();
-		int i = 0;
-		for(AccountRecord a:RainChequeApplication.currentSession.accountList)
-		{
-			ids.add(new Integer(i));
-			AccountRecord temp = new AccountRecord();
-			temp.name = a.name;
-			temp.paid = a.paid;
-			temp.settlement = a.settlement;
-			temp.worth = a.worth;
-			tempAccountList.add(temp);
-			i++;
-		}
+		setContentView(R.layout.payment_activity);		
 		bAddParticipants = (Button)findViewById(R.id.buttonAddInvolvedParticipants);
 		bAddParticipants.setOnClickListener(new OnClickListener()
 		{
 			@Override
 			public void onClick(View v) 
 			{
+				ArrayList<String> names = new ArrayList<String>();
+				for(AccountRecord ar: RainChequeApplication.currentSession.accountList)				
+					names.add(ar.name);
+				ArrayList<Boolean> checks = new ArrayList<Boolean>();
+				for(AccountRecord ar: RainChequeApplication.currentSession.accountList)
+				{
+					if(thisActivity.hasPayee(ar.id))
+						checks.add(new Boolean(true));
+					else
+						checks.add(new Boolean(false));
+				}
 				AlertDialog.Builder builder = new AlertDialog.Builder(PaymentActivity.this);
 	        	builder.setTitle(getString(R.string.select_payee));
-	        	String []names = new String[RainChequeApplication.currentSession.accountList.size()];
-	        	boolean []checks = new boolean[RainChequeApplication.currentSession.accountList.size()];
-	        	int i = 0;
-	        	for(AccountRecord a:RainChequeApplication.currentSession.accountList)
-	        	{
-	        		names[i] = a.name;
-	        		checks[i] = false;
-	        		if(debts==null)
-	        		{
-	        			i++;
-	        			continue;	        			
-	        		}
-	        		for(PerIdPayment pid: debts)
-	        		{
-	        			if(pid.id==i)
-	        			{
-	        				checks[i] = true;
-	        				break;
-	        			}
-	        		}	        		
-	        		i++;
-	        	}
-	        	builder.setMultiChoiceItems(names, checks, new DialogInterface.OnMultiChoiceClickListener()
+	        	String []mynames = new String [names.size()];
+	        	Boolean []mychecks= new Boolean [names.size()];
+	        	names.toArray(mynames);
+	        	checks.toArray(mychecks);
+	        	builder.setMultiChoiceItems(mynames, booleanFromBooleanArray(mychecks), new DialogInterface.OnMultiChoiceClickListener()
 	        	{
 
 					@Override
 					public void onClick(DialogInterface dialog, int which, boolean isChecked) 
 					{
-						
+
 					}	        		
 	        	});
 	        	builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() 
@@ -105,18 +78,14 @@ public class PaymentActivity extends ThemedActivity
 	        	    {
 	        	    	ListView list = ((AlertDialog)dialog).getListView();	        	    	
 	        	    	ArrayList<String> participants = new ArrayList<String>();
-	        	    	debts = new ArrayList<PerIdPayment>();	
-	        	    	participantCount = 0;
+	        	    	thisActivity.payees = new ArrayList<Integer>();
 	        	    	for (int i=0; i<list.getCount(); i++) 
 	        	    	{
 	        	    		boolean checked = list.isItemChecked(i);
 	        	    		if(checked)
-	        	    		{
-	        	    			PerIdPayment pid = new PerIdPayment();
-	        	    			pid.id = i;
-	        	    			debts.add(pid);
-	        	    			participantCount++;
+	        	    		{	        	    			
 	        	    			participants.add(RainChequeApplication.currentSession.accountList.get(i).name);
+	        	    			thisActivity.payees.add(new Integer(RainChequeApplication.currentSession.accountList.get(i).id));
 	        	    		}	        	    		
 	        	    	}
 	        	    	String selected = new String();	        	    		        	    	
@@ -129,13 +98,14 @@ public class PaymentActivity extends ThemedActivity
 	        	    		}
 	        	    		else if(i==participants.size()-1)
 	        	    		{
-	        	    			
+
 	        	    		}
 	        	    		else
 	        	    		{
 	        	    			selected = selected.concat(", ");
 	        	    		}	        	    			
 	        	    	}
+	        	    	participantCount = participants.size();
 	        	    	if(selected.contentEquals(""))
 	        	    		selected = new String(getString(R.string.selected_participants));
 	        	    	tvList.setText(selected);
@@ -152,7 +122,9 @@ public class PaymentActivity extends ThemedActivity
 			}			
 		});
 		tvList = (TextView)findViewById(R.id.listOfInvolvedParticipants);
-		etLabel = (EditText)findViewById(R.id.editTextLabel);		
+		tvPayers = (TextView)findViewById(R.id.payerList);
+		etLabel = (EditText)findViewById(R.id.editTextLabel);
+		etActualTotal = (EditText)findViewById(R.id.actualTotal);		
 		bDone = (Button)findViewById(R.id.bDonePayments);
 		bDone.setOnClickListener(new OnClickListener()
 		{
@@ -189,9 +161,11 @@ public class PaymentActivity extends ThemedActivity
 		        	});
 		        	builder.show();
 				}
-				else
-					doneConfirmation();				
-			}
+				else					
+					doneConfirmation();
+				
+			}		
+			
 			
 		});
 		bAddPayers = (Button)findViewById(R.id.buttonAddPayingParticipants);
@@ -200,93 +174,163 @@ public class PaymentActivity extends ThemedActivity
 			@Override
 			public void onClick(View v) 
 			{
-				if(tempAccountList.size()==0)
+				ArrayList<String> names = new ArrayList<String>();
+				for(AccountRecord ar: RainChequeApplication.currentSession.accountList)				
+					names.add(ar.name);
+				ArrayList<Boolean> checks = new ArrayList<Boolean>();
+				for(AccountRecord ar: RainChequeApplication.currentSession.accountList)
 				{
-					AlertDialog.Builder builder = new AlertDialog.Builder(PaymentActivity.this);
-		        	builder.setTitle(getString(R.string.oops));
-		        	TextView tv = new TextView(PaymentActivity.this);
-		        	tv.setText(R.string.all_selected);
-		        	tv.setTextAppearance(PaymentActivity.this, android.R.style.TextAppearance_Large);
-    	        	tv.setPadding(30, 30, 30, 30);
-		        	builder.setView(tv);
-		        	builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() 
-		        	{
-		        	    public void onClick(DialogInterface dialog, int which) 
-		        	    {
-		        	        dialog.cancel();
-		        	    }
-		        	});
-		        	builder.show();
-		        	return;
-				}	
+					if(thisActivity.hasPayer(ar.id))
+						checks.add(new Boolean(true));
+					else
+						checks.add(new Boolean(false));
+				}
 				AlertDialog.Builder builder = new AlertDialog.Builder(PaymentActivity.this);
 	        	builder.setTitle(getString(R.string.select_payer));
-	        	builder.setAdapter(new ParticipantListAdapter(PaymentActivity.this, tempAccountList.toArray()), new DialogInterface.OnClickListener()
+	        	builder.setCancelable(false);
+	        	String []mynames = new String [names.size()];
+	        	Boolean []mychecks= new Boolean [names.size()];
+	        	names.toArray(mynames);
+	        	checks.toArray(mychecks);
+	        	builder.setMultiChoiceItems(mynames, booleanFromBooleanArray(mychecks), new DialogInterface.OnMultiChoiceClickListener()
 	        	{
-					@Override
-					public void onClick(DialogInterface dialog, int which) 
-					{
-						final AccountRecord a = tempAccountList.get(which);
-						final PerIdPayment payment = new PerIdPayment();
-						final int whichPayer = which;
-						AlertDialog.Builder builder = new AlertDialog.Builder(PaymentActivity.this);
-			        	builder.setTitle(getString(R.string.enter_amount));
-			        	final EditText input = new EditText(PaymentActivity.this);	        	
-			        	input.setInputType(InputType.TYPE_CLASS_NUMBER);
-			        	input.setPadding(30, 30, 30, 30);
-			        	builder.setView(input);
-			        	builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() 
-			        	{ 
-			        	    public void onClick(DialogInterface dialog, int which) 
-			        	    {
-			        	    	if(input.getText().toString().trim().contentEquals(""))
-			        	    		return;
-			        	    	payment.id = ids.get(whichPayer);
-								tempAccountList.remove(whichPayer);
-								ids.remove(whichPayer);								
-			        	    	LayoutInflater vi = (LayoutInflater) PaymentActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			        	    	View v = vi.inflate(R.layout.session_row, null);
-			        	    	LinearLayout lila = (LinearLayout)findViewById(R.id.listOfPayers); 
-			        	    	lila.addView(v);			        	    	
-			        	    	TextView payer = (TextView)findViewById(R.id.sessionName);
-			        	    	payer.setText(a.name);
-			        	    	payer.setId(1);
-			        	    	TextView contribution = (TextView)findViewById(R.id.sessionMembers);
-			        	    	payment.payment = Integer.parseInt(input.getText().toString());
-			        	    	subtotal += Integer.parseInt(input.getText().toString());
-			        	    	contribution.setText(getString(R.string.paid) + " " + input.getText().toString());
-			        	    	contribution.setId(1);
-			        	    	payments.add(payment);
-			        	    }
-			        	});
-			        	builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() 
-			        	{
-			        	    public void onClick(DialogInterface dialog, int which) 
-			        	    {
-			        	        dialog.cancel();
-			        	    }
-			        	});
 
-			        	builder.show();
-						
-					}
-	        		
+					@Override
+					public void onClick(DialogInterface dialog, int which, boolean isChecked) 
+					{
+						if(isChecked)
+						{
+							AlertDialog.Builder builder = new AlertDialog.Builder(PaymentActivity.this);
+				        	builder.setTitle(getString(R.string.enter_amount));
+				        	final int whichGuy = which;
+				        	final EditText input = new EditText(PaymentActivity.this);	        	
+				        	input.setInputType(InputType.TYPE_CLASS_NUMBER);
+				        	input.setPadding(30, 30, 30, 30);
+				        	builder.setView(input);
+				        	builder.setCancelable(false);
+				        	builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() 
+				        	{ 
+				        	    public void onClick(DialogInterface dialog, int which) 
+				        	    {				        	    	
+				        	    	int amount; 
+				        	    	if(input.getText().toString().contentEquals(""))
+				        	    		amount = 0;
+				        	    	else
+				        	    		amount = Integer.parseInt(input.getText().toString());
+				        	    	thisActivity.payers.add(new Integer(RainChequeApplication.currentSession.accountList.get(whichGuy).id));
+				        	    	thisActivity.payerMoney.add(new Integer(amount));
+				        	    	InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+				        	    	imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+				        	    }
+				        	});				        	
+				        	builder.show();
+						}
+						else
+						{
+							for(int x=0;x<thisActivity.payers.size();x++)
+							{
+								if(thisActivity.payers.get(x).intValue()==RainChequeApplication.currentSession.accountList.get(which).id)
+								{
+									thisActivity.payers.remove(x);
+									thisActivity.payerMoney.remove(x);
+								}
+							}
+						}
+					}	        		
 	        	});
-	        	builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() 
-	        	{
+	        	builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() 
+	        	{ 
 	        	    public void onClick(DialogInterface dialog, int which) 
-	        	    {
-	        	        dialog.cancel();
+	        	    {	        	    	
+	        	    	ArrayList<String> participants = new ArrayList<String>();
+	        	    	String selected = new String();	        	    		        	    	
+	        	    	for(AccountRecord ar: RainChequeApplication.currentSession.accountList)
+	        	    	{
+	        	    		if(thisActivity.hasPayer(ar.id))	        	    		
+	        	    			participants.add(new String(ar.name + " (" + thisActivity.getMoneyAtPayer(ar.id) + ")"));
+	        	    		
+        	    		}
+	        	    	
+	        	    	for(int i = 0;i<participants.size();i++)
+	        	    	{
+	        	    		selected = selected.concat(participants.get(i));
+	        	    		if(i==participants.size()-2)
+	        	    		{
+	        	    			selected = selected.concat(" and ");
+	        	    		}
+	        	    		else if(i==participants.size()-1)
+	        	    		{
+
+	        	    		}
+	        	    		else
+	        	    		{
+	        	    			selected = selected.concat(", ");
+	        	    		}	        	    			
+	        	    	}
+	        	    	if(selected.contentEquals(""))
+	        	    		selected = new String(getString(R.string.selected_participants));
+	        	    	tvPayers.setText(selected);
+	        	    	total = 0;
+	        			for(Integer i:thisActivity.payerMoney)
+	        				total += i.intValue();
+	        			etActualTotal.setText(new String("" + total));
 	        	    }
-	        	});
+	        	});	        	
 	        	builder.show();
 			}			
 		});
+	}	
+	
+	private boolean []booleanFromBooleanArray(Boolean []b)
+	{
+		boolean []booleans = new boolean[b.length];
+		for(int i=0;i<b.length;i++)		
+			booleans[i] = b[i];		
+		return booleans;
+		
 	}
 	
 	private void doneConfirmation()
 	{
-		if(tvList.getText().toString().contentEquals(getString(R.string.selected_participants)) || ids.size() == RainChequeApplication.currentSession.accountList.size())
+		if(!skipCheck)
+		{
+			total = 0;
+			for(Integer i:thisActivity.payerMoney)
+				total += i.intValue();
+		}
+		if(total!=Integer.parseInt(etActualTotal.getText().toString()))
+		{
+			AlertDialog.Builder builder = new AlertDialog.Builder(PaymentActivity.this);
+        	builder.setTitle(getString(R.string.who_kept_the_change));
+        	builder.setAdapter(new ParticipantListAdapter(PaymentActivity.this, RainChequeApplication.currentSession.accountList.toArray()), new DialogInterface.OnClickListener() 
+        	{				
+				@Override
+				public void onClick(DialogInterface dialog, int which) 
+				{
+					thisActivity.changeId = RainChequeApplication.currentSession.accountList.get(which).id;
+					change = RainChequeApplication.currentSession.accountList.get(which).name;
+					thisActivity.changeAmount = total - Integer.parseInt(etActualTotal.getText().toString());
+					total = Integer.parseInt(etActualTotal.getText().toString());
+					skipCheck = true;
+					doneConfirmation();
+				}
+        	});
+        	builder.setNegativeButton(getString(R.string.discard_change), new DialogInterface.OnClickListener() 
+        	{
+        	    public void onClick(DialogInterface dialog, int which) 
+        	    {
+        	        thisActivity.changeId = -1;
+        	        thisActivity.changeAmount = 0;
+        	        change = getString(R.string.no_one);
+        	        skipCheck = true;
+        	        doneConfirmation();
+        	    }
+        	});
+
+        	builder.show();
+			return;
+		}
+		if(tvList.getText().toString().contentEquals(getString(R.string.selected_participants)) || tvPayers.getText().toString().contentEquals(getString(R.string.selected_participants)))
 		{
 			AlertDialog.Builder builder = new AlertDialog.Builder(PaymentActivity.this);
         	builder.setTitle(getString(R.string.oops));
@@ -303,26 +347,25 @@ public class PaymentActivity extends ThemedActivity
         	    }
         	});
         	builder.show();
-        	return;
-		}
+		}		
 		else
 		{
-			for(PerIdPayment pid: debts)
+			int settleWorth = total / participantCount;
+			thisActivity.settleWorth = settleWorth;
+			for(AccountRecord ar:RainChequeApplication.currentSession.accountList)
 			{
-				RainChequeApplication.currentSession.accountList.get(pid.id).worth += subtotal / participantCount;
+				if(thisActivity.hasPayee(ar.id))
+					ar.worth += settleWorth;
 			}
-			for(PerIdPayment pip: payments)					
+			for(AccountRecord ar:RainChequeApplication.currentSession.accountList)
 			{
-				RainChequeApplication.currentSession.accountList.get(pip.id).paid += pip.payment;
-				String payer = RainChequeApplication.currentSession.accountList.get(pip.id).name;
-				String logText = String.format(getString(R.string.payment_statement), payer, pip.payment, etLabel.getText().toString(), tvList.getText().toString());
-    	    	LogEntry logEntry = new LogEntry();
-    	    	logEntry.entry = logText;
-    	    	Time now = new Time();
-    	    	now.setToNow();
-    	    	String date = DateFormat.format("d MMMM yyyy", Calendar.getInstance()).toString();
-    	    	logEntry.time = now.format(date + " at %I:%M:%S");				        	    	
-    	    	RainChequeApplication.currentSession.sessionLog.add(logEntry); 	        	    	
+				if(thisActivity.hasPayer(ar.id))
+					ar.paid += thisActivity.getMoneyAtPayer(ar.id);
+			}
+			for(AccountRecord ar:RainChequeApplication.currentSession.accountList)
+			{
+				if(ar.id == thisActivity.changeId)
+					ar.settlement += thisActivity.changeAmount;
 			}
 			for(SessionRecord s:RainChequeApplication.sessionList)
 			{
@@ -334,10 +377,19 @@ public class PaymentActivity extends ThemedActivity
 				}
 			}
 			RainChequeApplication.writeAccountsToFile(getApplicationContext());
+			String logText = String.format(getString(R.string.payment_statement), etLabel.getText().toString(),  tvList.getText().toString(), new String("" + total), tvPayers.getText().toString(), change);	    	
+			LogEntry logEntry = new LogEntry();
+	    	logEntry.entry = logText;
+	    	Time now = new Time();
+	    	now.setToNow();
+	    	String date = DateFormat.format("d MMMM yyyy", Calendar.getInstance()).toString();
+	    	logEntry.time = now.format(date + " at %I:%M:%S");				        	    	
+	    	RainChequeApplication.currentSession.sessionLog.add(logEntry); 	
 			Intent showLog = new Intent(PaymentActivity.this, LogActivity.class);
 			startActivity(showLog);
 			finish();
+			        	    	
+		
 		}
 	}
-
 }

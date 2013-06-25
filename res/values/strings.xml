@@ -48,7 +48,7 @@
 	<string name="none_selected">No participant has been selected</string>
 	<string name="no_label_selected">Looks like you have not entered any label. Labels are necessary to distinguish different payments in the session log. Would you like to add a label now?</string>
 	<string name="paid">Paid:</string>
-	<string name="payment_statement">%1$s has paid %2$s on account of %3$s for %4$s</string>
+	<string name="payment_statement">Activity %1$s for %2$s worth a total of %3$s was paid by %4$s. %5$s kept the change.</string>
 	<string name="tagline">One more way to save paper</string>
 	<string name="first_time">Looks like this is the first time you are trying the app. Would you like to take a tour?</string>
 	<string name="yes_sure">Yes, sure!</string>
@@ -86,6 +86,9 @@
 	<string name="export_as">Export as&#8230;</string>
 	<string name="export_desc">File exported successfully</string>
 	<string name="import_file">Import</string>
+	<string name="who_kept_the_change">Who kept the change?</string>
+	<string name="no_one">No one</string>
+	<string name="discard_change">Discard the change</string>
 	<string name="import_file_to_raincheque">Import to RainCheque</string>
 	<string name="import_file_successful">Imported file successfully</string>
 	<string name="share">Share</string>
