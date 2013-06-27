@@ -21,6 +21,9 @@
       android:layout_height="wrap_content"
       android:adjustViewBounds="true"
       android:contentDescription="@string/chapter1title"
+      android:paddingLeft="20dp"
+      android:paddingRight="20dp"
+      
       android:scaleType="fitXY"
       android:src="@drawable/somecontribute" />
 

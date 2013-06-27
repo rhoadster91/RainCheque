@@ -14,6 +14,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" 
+         android:launchMode="singleInstance"
         android:name="com.xteam.raincheque.RainChequeApplication">  
         
         
@@ -31,15 +32,25 @@
         <activity android:name="com.xteam.raincheque.LogActivity" />
         <activity android:name="com.xteam.raincheque.SuggestionActivity" />
         <activity android:name="com.xteam.raincheque.PaymentActivity" />
-        <activity android:name="com.xteam.raincheque.ControlBoardActivity" android:launchMode="singleTop" android:label="@string/import_file_to_raincheque" 
+        <activity android:name="com.xteam.raincheque.ControlBoardActivity" android:label="@string/import_file_to_raincheque" 
             >
             <intent-filter>
         <action android:name="android.intent.action.VIEW" />      
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="android.intent.category.BROWSABLE" />
-        <data android:mimeType="*/*" />
-        <data android:pathPattern=".*\\.rcs" />
+        <data android:scheme="content" android:pathPattern=".*\\.rcs" />
+        <data android:mimeType="application/octet-stream" />
+              
     </intent-filter>
+    <intent-filter>
+        <action android:name="android.intent.action.VIEW" />      
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:mimeType="text/*" />
+        <data android:scheme="file" />
+        <data android:pathPattern=".*\\.rcs" />
+        <data android:host="*" />
+    </intent-filter>    
             </activity>
             <activity android:name="com.xteam.raincheque.ActivityActivity" />
         <activity android:name="com.xteam.raincheque.SessionActivity" />

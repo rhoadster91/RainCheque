@@ -76,7 +76,7 @@ public class SplashActivity extends Activity
 		
 		adapter = new SplashPagerAdapter();
 		viewPager = (ViewPager)findViewById(R.id.viewPager);
-		viewPager.setAdapter(adapter);
+		viewPager.setAdapter(adapter);		
 		indicator[0] = (ImageView)findViewById(R.id.pageIndicator1);
 		indicator[1] = (ImageView)findViewById(R.id.pageIndicator2);
 		indicator[2] = (ImageView)findViewById(R.id.pageIndicator3);
@@ -118,7 +118,7 @@ public class SplashActivity extends Activity
 				int imageResourceOff = getResources().getIdentifier("@drawable/ring_off", null, getPackageName());						
 				int imageResourceOn = getResources().getIdentifier("@drawable/ring_on", null, getPackageName());
 				Drawable resOn = getResources().getDrawable(imageResourceOn);
-				Drawable resOff = getResources().getDrawable(imageResourceOff);
+				Drawable resOff = getResources().getDrawable(imageResourceOff);								
 				indicator[arg0].setImageDrawable(resOn);
 				for(int i=0;i<5;i++)
 				{

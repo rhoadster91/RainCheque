@@ -40,16 +40,25 @@ public class ControlBoardActivity extends ThemedActivity
 	ListView inactiveSessionList = null;
 	SessionListAdapter activeSessionListAdapter = null;
 	SessionListAdapter inactiveSessionListAdapter = null;
-	
+	SlidingPaneLayout slidingPane;
 	
 	private void readFromIntent()
-	{
-		
+	{		
 		Intent intent = getIntent();
-		if(intent.getAction()!=null ? intent.getAction().contentEquals(Intent.ACTION_VIEW) : false)			
+		if(intent==null)			
+			return;
+		if(intent.getAction()!=null ? intent.getAction().contentEquals(Intent.ACTION_VIEW) : true)			
 		{
-			Uri uri = intent.getData();			
-			if(intent.getType()!=null ? (intent.getType().startsWith("text") || intent.getType().startsWith("file")) : true)
+			Uri uri = intent.getData();		
+			if(uri==null)
+			{
+				uri = (Uri)intent.getParcelableExtra(Intent.EXTRA_STREAM);
+				if(uri==null)
+					return;
+			}
+			if(uri.getScheme()==null)
+				return;
+			if(uri.getScheme().contentEquals("file"))
 			{
 				try
 				{
@@ -65,19 +74,20 @@ public class ControlBoardActivity extends ThemedActivity
 					else
 						mySession.sessionID = 1;
 					RainChequeApplication.sessionList.add(mySession);
+					if(!mySession.isActive)
+						slidingPane.openPane();
 					RainChequeApplication.writeAccountsToFile(getApplicationContext());
 					refreshList();
 					Toast.makeText(getApplicationContext(), getString(R.string.import_file_successful), Toast.LENGTH_LONG).show();
+					setIntent(null);
 				}
 				catch(Exception e)
 				{
 					e.printStackTrace();
 				}
 			}
-			if(intent.getType()!=null ? intent.getType().startsWith("application") : false)
+			if(uri.getScheme().contentEquals("content"))
 			{			
-				Toast.makeText(getApplicationContext(), "Action " + intent.getAction(), Toast.LENGTH_LONG).show();
-				
 				final String scheme = uri.getScheme();
 				if(ContentResolver.SCHEME_CONTENT.equals(scheme)) 
 				{
@@ -97,10 +107,13 @@ public class ControlBoardActivity extends ThemedActivity
 						else
 							mySession.sessionID = 1;
 						RainChequeApplication.sessionList.add(mySession);
+						if(!mySession.isActive)
+							slidingPane.openPane();						
 						RainChequeApplication.writeAccountsToFile(getApplicationContext());
 						refreshList();
 						is.close();
 						Toast.makeText(getApplicationContext(), getString(R.string.import_file_successful), Toast.LENGTH_LONG).show();
+						setIntent(null);
 				    }
 					catch(Exception e)
 					{
@@ -121,7 +134,7 @@ public class ControlBoardActivity extends ThemedActivity
 		RainChequeApplication.readAccountsFromFile(getApplicationContext());	
 		readFromIntent();		
 		refreshList();
-		SlidingPaneLayout slidingPane = (SlidingPaneLayout)findViewById(R.id.sliding_pane_layout);
+		slidingPane = (SlidingPaneLayout)findViewById(R.id.sliding_pane_layout);
 		slidingPane.setSliderFadeColor(Color.TRANSPARENT);		
 	}
 	
@@ -173,6 +186,7 @@ public class ControlBoardActivity extends ThemedActivity
 	        	    			sr.isActive = false;
 	        	    	}
 	        	    	RainChequeApplication.writeAccountsToFile(getApplicationContext());
+	        	    	slidingPane.openPane();
 	        	    	refreshList();
 	        	    }
 	        	});
@@ -405,8 +419,19 @@ public class ControlBoardActivity extends ThemedActivity
 	protected void onResume() 
 	{
 		super.onResume();
+		if(getIntent()!=null)
+			readFromIntent();		
 		refreshList();
 	}
+
+	@Override
+	protected void onNewIntent(Intent intent)
+	{
+		super.onNewIntent(intent);
+		readFromIntent();		
+	}
+	
+	
 	
 	
 

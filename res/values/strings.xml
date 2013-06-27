@@ -60,11 +60,11 @@
 	<string name="chapter3title">3. Payments</string>
 	<string name="chapter4title">4. Settlements</string>
 	<string name="chapter5title">5. Proposed settlements</string>
-	<string name="chapter1text">When you\'re with your friends, you wouldn\'t want to waste time thinking about how much money you\'ve spent with them. That\'s where RainCheque kicks in. You can create a session every time you go out with your friends and forget about it.</string>	
+	<string name="chapter1text">When you\'re with your friends, you wouldn\'t want to waste time thinking about money you\'ve spent. That\'s where RainCheque kicks in. You can create a session every time you\'re out with friends and forget about it.</string>	
 	<string name="chapter2text">Each session will have two or more participants. Each person having his own taste, his own money and own balance.</string>
-	<string name="chapter3text">When you buy anything, simply record it in the session by confirming the payment. The app knows that it is not necessary that each person pays equally or that not all persons want the same thing.</string>
+	<string name="chapter3text">When you do any activity, simply add it in the session. The app knows that it\'s not necessary that each person pays equally or that not all persons want the same thing.</string>
 	<string name="chapter4text">When any person gives some money to someone else, you can keep that record in this app by making a settlement between two participants.</string>
-	<string name="chapter5text">Finally, when it\'s time to end the session (or when you feel like settlements are due) let the app do it\'s magic. The app will tell you exactly who owes how much and to whom.</string>
+	<string name="chapter5text">Finally, when it\'s time to end the session (or when you feel settlements are due) let the app do it\'s magic. It will tell you exactly who owes how much and to whom.</string>
 	<string name="gotit">Got it!</string>
 	<string name="change">Change</string>
 	<string name="select_theme">Select application theme</string>
