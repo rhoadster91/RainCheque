@@ -1,4 +1,4 @@
-package com.xteam.raincheque;
+package com.rhoadster91.raincheque;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-import com.xteam.raincheque.ListenerList.FireHandler;
+import com.rhoadster91.raincheque.ListenerList.FireHandler;
 
 import android.app.Activity;
 import android.app.AlertDialog;

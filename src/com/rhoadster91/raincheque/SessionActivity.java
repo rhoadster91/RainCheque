@@ -1,4 +1,4 @@
-package com.xteam.raincheque;
+package com.rhoadster91.raincheque;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Calendar;
 
-import com.xteam.raincheque.FileDialog.DirectorySelectedListener;
+import com.rhoadster91.raincheque.FileDialog.DirectorySelectedListener;
 
 import android.app.Activity;
 import android.app.AlertDialog;

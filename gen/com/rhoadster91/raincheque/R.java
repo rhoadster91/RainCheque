@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.xteam.raincheque;
+package com.rhoadster91.raincheque;
 
 public final class R {
     public static final class attr {

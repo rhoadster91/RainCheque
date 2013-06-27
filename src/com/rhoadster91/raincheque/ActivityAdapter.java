@@ -1,4 +1,4 @@
-package com.xteam.raincheque;
+package com.rhoadster91.raincheque;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package com.xteam.raincheque;
+package com.rhoadster91.raincheque;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
-import com.xteam.raincheque.FileDialog.FileSelectedListener;
+import com.rhoadster91.raincheque.FileDialog.FileSelectedListener;
 
 import android.net.Uri;
 import android.os.Bundle;

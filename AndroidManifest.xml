@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.xteam.raincheque"
+    package="com.rhoadster91.raincheque"
     android:versionCode="1"
     android:versionName="1.0">
 	<uses-permission android:name="android.permission.READ_CONTACTS"/>       
@@ -15,11 +15,11 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" 
          android:launchMode="singleInstance"
-        android:name="com.xteam.raincheque.RainChequeApplication">  
+        android:name="com.rhoadster91.raincheque.RainChequeApplication">  
         
         
         <activity
-            android:name="com.xteam.raincheque.SplashActivity"
+            android:name="com.rhoadster91.raincheque.SplashActivity"
             android:label="@string/app_name" 
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -28,11 +28,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.xteam.raincheque.ListOfParticipantsActivity" />
-        <activity android:name="com.xteam.raincheque.LogActivity" />
-        <activity android:name="com.xteam.raincheque.SuggestionActivity" />
-        <activity android:name="com.xteam.raincheque.PaymentActivity" />
-        <activity android:name="com.xteam.raincheque.ControlBoardActivity" android:label="@string/import_file_to_raincheque" 
+        <activity android:name="com.rhoadster91.raincheque.ListOfParticipantsActivity" />
+        <activity android:name="com.rhoadster91.raincheque.LogActivity" />
+        <activity android:name="com.rhoadster91.raincheque.SuggestionActivity" />
+        <activity android:name="com.rhoadster91.raincheque.PaymentActivity" />
+        <activity android:name="com.rhoadster91.raincheque.ControlBoardActivity" android:label="@string/import_file_to_raincheque" 
             >
             <intent-filter>
         <action android:name="android.intent.action.VIEW" />      
@@ -52,8 +52,8 @@
         <data android:host="*" />
     </intent-filter>    
             </activity>
-            <activity android:name="com.xteam.raincheque.ActivityActivity" />
-        <activity android:name="com.xteam.raincheque.SessionActivity" />
+            <activity android:name="com.rhoadster91.raincheque.ActivityActivity" />
+        <activity android:name="com.rhoadster91.raincheque.SessionActivity" />
     </application>
 
 </manifest>
