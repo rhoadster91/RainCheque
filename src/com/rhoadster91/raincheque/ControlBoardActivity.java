@@ -79,6 +79,7 @@ public class ControlBoardActivity extends ThemedActivity
 					RainChequeApplication.writeAccountsToFile(getApplicationContext());
 					refreshList();
 					Toast.makeText(getApplicationContext(), getString(R.string.import_file_successful), Toast.LENGTH_LONG).show();
+					fIn.close();
 					setIntent(null);
 				}
 				catch(Exception e)
@@ -352,6 +353,7 @@ public class ControlBoardActivity extends ThemedActivity
 						RainChequeApplication.sessionList.add(mySession);
 						RainChequeApplication.writeAccountsToFile(getApplicationContext());
 						refreshList();
+						fIn.close();
 					} 
 					catch (IOException e) 
 					{

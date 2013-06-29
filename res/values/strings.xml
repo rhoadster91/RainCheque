@@ -76,7 +76,8 @@
 	<string name="participants">Participants</string>
 	<string name="show_log">Show log</string>
 	<string name="remove_participant">Remove participant</string>
-	<string name="cant_remove_participant">You can only remove a participant if all his/her dues are settled i.e. if his/her balance is zero.</string>
+	<string name="cant_remove_participant">You can only remove a participant if he/she is not involved in any activity. To remove, delete the activity %1$s first.</string>
+	<string name="cant_remove_participant_balance">You can only remove a participant if he/she has a non-zero balance. To remove, settle this participant\'s accounts first.</string>
 	<string name="too_few_participants">Too few participants</string>
 	<string name="too_few_participants_description">Since there are not enough participants remaining in this session, it will be closed, unless you add a new participant right now. What would you like to do?</string>
 	<string name="too_few_participants_description_2">Since there are not enough participants remaining in this session, you cannot activate it, unless you add a new participant right now. What would you like to do?</string>

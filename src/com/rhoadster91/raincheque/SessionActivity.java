@@ -584,40 +584,12 @@ public class SessionActivity extends ThemedActivity
 		{
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)			
 			{	
-				if(RainChequeApplication.currentSession.accountList.get(arg2).getBalance()==0)
-				{
-					AlertDialog.Builder builder = new AlertDialog.Builder(SessionActivity.this);
-		        	builder.setTitle(getString(R.string.choose_session_action));	        	
-		        	final int i = arg2; 
-		        	builder.setPositiveButton(getString(R.string.remove_participant), new DialogInterface.OnClickListener() 
-		        	{ 
-		        	    public void onClick(DialogInterface dialog, int which) 
-		        	    {
-		        	    	RainChequeApplication.currentSession.accountList.remove(i);
-		        	    	for(SessionRecord sr: RainChequeApplication.sessionList)
-		        	    	{
-		        	    		if(sr.sessionID==RainChequeApplication.currentSession.sessionID)
-		        	    			sr.accountList = RainChequeApplication.currentSession.accountList;
-		        	    	}
-		        	    	RainChequeApplication.writeAccountsToFile(getApplicationContext());
-		        	    	refreshList();
-		        	    }
-		        	});	        	
-		        	builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() 
-		        	{
-		        	    public void onClick(DialogInterface dialog, int which) 
-		        	    {
-		        	        dialog.cancel();
-		        	    }
-		        	});	
-		        	builder.show();
-				}
-				else
+				if(RainChequeApplication.currentSession.accountList.get(arg2).getBalance()!=0)
 				{
 					AlertDialog.Builder builder = new AlertDialog.Builder(SessionActivity.this);
 		        	builder.setTitle(getString(R.string.oops));
 		        	TextView tv = new TextView(SessionActivity.this);
-		        	tv.setText(R.string.cant_remove_participant);
+		        	tv.setText(getString(R.string.cant_remove_participant_balance));
 		        	tv.setTextAppearance(SessionActivity.this, android.R.style.TextAppearance_Large);
 		        	tv.setPadding(30, 30, 30, 30);
 		        	builder.setView(tv);
@@ -628,9 +600,59 @@ public class SessionActivity extends ThemedActivity
 		        	        dialog.cancel();
 		        	    }
 		        	});
-		        	builder.show();
+		        	builder.show();				
+					return false;
 				}
+						
+				for(ActivityRecord ar: RainChequeApplication.currentSession.activityList)
+				{					
+					if(ar.hasPayee(RainChequeApplication.currentSession.accountList.get(arg2).id) || ar.hasPayer(RainChequeApplication.currentSession.accountList.get(arg2).id))
+					{
+						AlertDialog.Builder builder = new AlertDialog.Builder(SessionActivity.this);
+			        	builder.setTitle(getString(R.string.oops));
+			        	TextView tv = new TextView(SessionActivity.this);
+			        	tv.setText(String.format(getString(R.string.cant_remove_participant), ar.label));
+			        	tv.setTextAppearance(SessionActivity.this, android.R.style.TextAppearance_Large);
+			        	tv.setPadding(30, 30, 30, 30);
+			        	builder.setView(tv);
+			        	builder.setNegativeButton(getString(R.string.ok), new DialogInterface.OnClickListener() 
+			        	{
+			        	    public void onClick(DialogInterface dialog, int which) 
+			        	    {
+			        	        dialog.cancel();
+			        	    }
+			        	});
+			        	builder.show();				
+						return false;
+					}
+				}		
+				AlertDialog.Builder builder = new AlertDialog.Builder(SessionActivity.this);
+	        	final int i = arg2;
+	        	builder.setTitle(getString(R.string.choose_session_action));   
+	        	builder.setPositiveButton(getString(R.string.remove_participant), new DialogInterface.OnClickListener() 
+	        	{ 
+	        	    public void onClick(DialogInterface dialog, int which) 
+	        	    {
+	        	    	RainChequeApplication.currentSession.accountList.remove(i);
+	        	    	for(SessionRecord sr: RainChequeApplication.sessionList)
+	        	    	{
+	        	    		if(sr.sessionID==RainChequeApplication.currentSession.sessionID)
+	        	    			sr.accountList = RainChequeApplication.currentSession.accountList;
+	        	    	}
+	        	    	RainChequeApplication.writeAccountsToFile(getApplicationContext());
+	        	    	refreshList();
+	        	    }
+	        	});	        	
+	        	builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() 
+	        	{
+	        	    public void onClick(DialogInterface dialog, int which) 
+	        	    {
+	        	        dialog.cancel();
+	        	    }
+	        	});	
+	        	builder.show();
 				return false;
+				
 			}
 
 		});	
